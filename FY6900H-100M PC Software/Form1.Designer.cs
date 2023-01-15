@@ -628,12 +628,16 @@
             "NegStair",
             "Positive Exponent",
             "Negative Exponent",
-            "Positive falling exponent",
-            "Negative falling exponent",
-            "Positive logarithm",
-            "Negative logarithm",
-            "Positive half wave",
-            "Negative half wave",
+            "Positive Falling exponent",
+            "Negative Falling exponent",
+            "Positive Logarithm",
+            "Negative Logarithm",
+            "Positive Falling Logaritm",
+            "Negative Falling Logaritm",
+            "Positive Full Wave",
+            "Negative Full Wave",
+            "Positive Half Wave",
+            "Negative Half Wave",
             "Lorentz-Pu",
             "Multitone ",
             "Random-Noi",
@@ -714,7 +718,8 @@
             this.mainWaveForm.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.mainWaveForm.Size = new System.Drawing.Size(210, 31);
             this.mainWaveForm.TabIndex = 97;
-            this.mainWaveForm.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            //this.mainWaveForm.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.mainWaveForm.SelectedIndexChanged += new System.EventHandler(this.mainWaveForm_SelectedIndexChanged); //Why not this? comboBox1 is no more found in the project
             // 
             // mainOnOff
             // 
@@ -1039,12 +1044,16 @@
             "NegStair",
             "Positive Exponent",
             "Negative Exponent",
-            "Positive falling exponent",
-            "Negative falling exponent",
-            "Positive logarithm",
-            "Negative logarithm",
-            "Positive half wave",
-            "Negative half wave",
+            "Positive Falling exponent",
+            "Negative Falling exponent",
+            "Positive Logarithm",
+            "Negative Logarithm",
+            "Positive Falling Logaritm",
+            "Negative Falling Logaritm",
+            "Positive Full Wave",
+            "Negative Full Wave",
+            "Positive Half Wave",
+            "Negative Half Wave",
             "Lorentz-Pu",
             "Multitone ",
             "Random-Noi",

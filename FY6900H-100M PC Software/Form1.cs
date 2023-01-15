@@ -30,10 +30,11 @@ namespace FY6900H_100M_PC_Software
 
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        //private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void mainWaveForm_SelectedIndexChanged(object sender, EventArgs e)
         {
-            sendCommand("WMW" + waveConvert1(mainWaveForm.Text));
-            //sendCommand("WMW" + mainWaveForm.SelectedIndex.ToString());
+            //sendCommand("WMW" + waveConvert1(mainWaveForm.Text));
+            sendCommand("WMW" + mainWaveForm.SelectedIndex.ToString());   //Sends item number in command it must match command parameter properly
         }
 
         private void portConnectToolStripMenuItem_Click(object sender, EventArgs e)
@@ -194,8 +195,8 @@ namespace FY6900H_100M_PC_Software
 
         private void auxWaveForm_SelectedIndexChanged(object sender, EventArgs e)
         {
-            sendCommand("WFW" + waveConvert1(auxWaveForm.Text));
-            //sendCommand("WFW" + auxWaveForm.SelectedIndex.ToString());
+            //sendCommand("WFW" + waveConvert1(auxWaveForm.Text));
+            sendCommand("WFW" + auxWaveForm.SelectedIndex.ToString());  //Sends item number in command it must match command parameter properly
         }
     }
 
