@@ -174,9 +174,9 @@ namespace FY6900H_100M_PC_Software
             if (freq != "") sendCommand("WMF" + freq);
         }
         //Main Amplitude control
-       private void mainAmplitude_TextChanged(object sender, EventArgs e)
+        private void mainAmplitude_TextChanged(object sender, EventArgs e)
         {
-           string amplitude = amplitudeNormalizeToSend(mainAmplitudeUnit.Text, mainAmplitude.Text);
+            string amplitude = amplitudeNormalizeToSend(mainAmplitudeUnit.Text, mainAmplitude.Text);
             if (amplitude != "") sendCommand("WMA" + amplitude);
         }
         //Main Amplitude unit control
@@ -185,7 +185,14 @@ namespace FY6900H_100M_PC_Software
             displayParameters();
         }
         //Main Offset control
-        private void mainOffestUnit_SelectedIndexChanged(object sender, EventArgs e)
+        private void mainOffset_TextChanged(object sender, EventArgs e)
+        {
+            string offset = offsetNormalizeToSend(mainOffsetUnit.Text, mainOffset.Text);
+            if (offset != "") sendCommand("WMO" + offset);
+
+        }
+        //Main Offset unit control
+        private void mainOffsetUnit_SelectedIndexChanged(object sender, EventArgs e)
         {
             displayParameters();
         }
@@ -231,6 +238,13 @@ namespace FY6900H_100M_PC_Software
             displayParameters();
         }
         //Aux Offset control
+        private void auxOffset_TextChanged(object sender, EventArgs e)
+        {
+            string offset = offsetNormalizeToSend(auxOffsetUnit.Text, auxOffset.Text);
+            if (offset != "") sendCommand("WFO" + offset);
+
+        }
+        //Aux  Offset unit control
         private void auxOffsetUnit_SelectedIndexChanged(object sender, EventArgs e)
         {
             displayParameters();

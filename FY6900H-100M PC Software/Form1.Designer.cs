@@ -49,7 +49,7 @@
             this.ControlWindow = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.mainOffestUnit = new System.Windows.Forms.ComboBox();
+            this.mainOffsetUnit = new System.Windows.Forms.ComboBox();
             this.mainAmplitudeUnit = new System.Windows.Forms.ComboBox();
             this.mainFreqUnit = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -312,7 +312,7 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.mainOffestUnit);
+            this.splitContainer1.Panel1.Controls.Add(this.mainOffsetUnit);
             this.splitContainer1.Panel1.Controls.Add(this.mainAmplitudeUnit);
             this.splitContainer1.Panel1.Controls.Add(this.mainFreqUnit);
             this.splitContainer1.Panel1.Controls.Add(this.label3);
@@ -382,20 +382,20 @@
             this.splitContainer1.SplitterDistance = 602;
             this.splitContainer1.TabIndex = 0;
             // 
-            // mainOffestUnit
+            // mainOffsetUnit
             // 
-            this.mainOffestUnit.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.mainOffestUnit.FormattingEnabled = true;
-            this.mainOffestUnit.Items.AddRange(new object[] {
+            this.mainOffsetUnit.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.mainOffsetUnit.FormattingEnabled = true;
+            this.mainOffsetUnit.Items.AddRange(new object[] {
             "V",
             "mV"});
-            this.mainOffestUnit.Location = new System.Drawing.Point(303, 196);
-            this.mainOffestUnit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.mainOffestUnit.Name = "mainOffestUnit";
-            this.mainOffestUnit.Size = new System.Drawing.Size(72, 33);
-            this.mainOffestUnit.TabIndex = 121;
-            this.mainOffestUnit.Text = "V";
-            this.mainOffestUnit.SelectedIndexChanged += new System.EventHandler(this.mainOffestUnit_SelectedIndexChanged);
+            this.mainOffsetUnit.Location = new System.Drawing.Point(303, 196);
+            this.mainOffsetUnit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.mainOffsetUnit.Name = "mainOffsetUnit";
+            this.mainOffsetUnit.Size = new System.Drawing.Size(72, 33);
+            this.mainOffsetUnit.TabIndex = 121;
+            this.mainOffsetUnit.Text = "V";
+            this.mainOffsetUnit.SelectedIndexChanged += new System.EventHandler(this.mainOffsetUnit_SelectedIndexChanged);
             // 
             // mainAmplitudeUnit
             // 
@@ -552,6 +552,7 @@
             this.mainOffset.Size = new System.Drawing.Size(196, 32);
             this.mainOffset.TabIndex = 106;
             this.mainOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.mainOffset.TextChanged += new System.EventHandler(this.mainOffset_TextChanged);
             // 
             // hScrollBar3
             // 
@@ -990,6 +991,7 @@
             this.auxOffset.Size = new System.Drawing.Size(209, 32);
             this.auxOffset.TabIndex = 130;
             this.auxOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.auxOffset.TextChanged += new System.EventHandler(this.auxOffset_TextChanged);
             // 
             // hScrollBar10
             // 
@@ -1364,7 +1366,7 @@
         private System.Windows.Forms.Timer timer1;
         private ComboBox mainFreqUnit;
         private ComboBox auxFreqUnit;
-        private ComboBox mainOffestUnit;
+        private ComboBox mainOffsetUnit;
         private ComboBox mainAmplitudeUnit;
         private ComboBox auxOffsetUnit;
         private ComboBox auxAmplitudeUnit;
