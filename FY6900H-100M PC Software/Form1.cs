@@ -30,12 +30,18 @@ namespace FY6900H_100M_PC_Software
 
         }
 
-        //private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void mainWaveForm_Click(object sender, EventArgs e)
+        {
+            timer1.Stop();
+        }
+
         private void mainWaveForm_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //sendCommand("WMW" + waveConvert1(mainWaveForm.Text));
             sendCommand("WMW" + mainWaveForm.SelectedIndex.ToString());   //Sends item number in command it must match command parameter properly
+            timer1.Start();
         }
+
+
 
         private void portConnectToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -43,7 +49,7 @@ namespace FY6900H_100M_PC_Software
             Parameters.port = "";
             timer1.Enabled = false;
         }
-   
+
         private void autoConnectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             comport.Text = "Searching";
@@ -59,21 +65,17 @@ namespace FY6900H_100M_PC_Software
             //SerialPortIO.printParameters();
         }
 
- 
+
         private void model_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        //private void cOM1ToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //        verifyPort("COM1");
-        //}
         private void cOM2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             verifyPort("COM2");
         }
-    
+
         private void cOM3ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             verifyPort("COM3");
@@ -81,11 +83,11 @@ namespace FY6900H_100M_PC_Software
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if(Parameters.model.Contains("FY6900"))
+            if (Parameters.model.Contains("FY6900"))
             {
                 readParameters();
                 displayParameters();
-           }
+            }
         }
         private void verifyPort(string port)
         {
@@ -147,10 +149,15 @@ namespace FY6900H_100M_PC_Software
         {
             verifyPort("COM10");
         }
+        //private void mainFrequency_Click(object sender, EventArgs e) //Not needed
+        //{
+        //    timer1.Stop();
+        //}
 
-        private void mainFrequency_TextChanged(object sender, EventArgs e)
+    private void mainFrequency_TextChanged(object sender, EventArgs e)
         {
-
+            string freq = frequencyNormalizeToSend(mainFreqUnit.Text, mainFrequency.Text);
+            if (freq != "") sendCommand("WMF" + freq);
         }
 
         private void mainOnOff_Click(object sender, EventArgs e)
@@ -192,11 +199,25 @@ namespace FY6900H_100M_PC_Software
         {
             displayParameters();
         }
+        private void auxWaveForm_Click(object sender, EventArgs e)
+        {
+            timer1.Stop();
+        }
 
         private void auxWaveForm_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //sendCommand("WFW" + waveConvert1(auxWaveForm.Text));
             sendCommand("WFW" + auxWaveForm.SelectedIndex.ToString());  //Sends item number in command it must match command parameter properly
+            timer1.Start();
+        }
+
+        private void auxFrequency_TextChanged(object sender, EventArgs e)
+        {
+            sendCommand("WFF" + frequencyNormalizeToSend(auxFreqUnit.Text, auxFrequency.Text));
+        }
+
+        private void mainAmplitude_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 
