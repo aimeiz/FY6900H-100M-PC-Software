@@ -403,6 +403,7 @@
             this.mainAmplitudeUnit.FormattingEnabled = true;
             this.mainAmplitudeUnit.Items.AddRange(new object[] {
             "V",
+            "mV",
             "dBV",
             "dBm"});
             this.mainAmplitudeUnit.Location = new System.Drawing.Point(303, 133);
@@ -606,7 +607,6 @@
             this.mainFrequency.Size = new System.Drawing.Size(196, 32);
             this.mainFrequency.TabIndex = 100;
             this.mainFrequency.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            //this.mainFrequency.Click += new System.EventHandler(this.mainFrequency_Click); //Not needed
             this.mainFrequency.TextChanged += new System.EventHandler(this.mainFrequency_TextChanged);
             // 
             // WAVE
@@ -785,6 +785,7 @@
             this.auxAmplitudeUnit.FormattingEnabled = true;
             this.auxAmplitudeUnit.Items.AddRange(new object[] {
             "V",
+            "mV",
             "dBV",
             "dBm"});
             this.auxAmplitudeUnit.Location = new System.Drawing.Point(318, 136);
@@ -1016,6 +1017,7 @@
             this.auxAmplitude.Size = new System.Drawing.Size(209, 32);
             this.auxAmplitude.TabIndex = 127;
             this.auxAmplitude.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.auxAmplitude.TextChanged += new System.EventHandler(this.auxAmplitude_TextChanged);
             // 
             // hScrollBar11
             // 

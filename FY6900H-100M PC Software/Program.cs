@@ -35,7 +35,7 @@ namespace FY6900H_100M_PC_Software
             public static string mainWaveForm;
             //public static double mainFrequency;
             public static decimal mainFrequency;
-            public static float mainAmplitude;
+            public static decimal mainAmplitude;
             public static float mainOffset;
             public static float mainDuty;
             public static float mainPhase;
@@ -43,7 +43,7 @@ namespace FY6900H_100M_PC_Software
             public static string auxWaveForm;
             //public static double auxFrequency;
             public static decimal auxFrequency;
-            public static float auxAmplitude;
+            public static decimal auxAmplitude;
             public static float auxOffset;
             public static float auxDuty;
             public static float auxPhase;
@@ -118,7 +118,7 @@ namespace FY6900H_100M_PC_Software
             Parameters.mainWaveForm = readParameter("RMW");
             Parameters.mainFrequency = decimal.Parse(readParameter("RMF"), NumberStyles.Any, ci);
             //            Parameters.mainFrequency = double.Parse(readParameter("RMF"), NumberStyles.Any, ci);
-            Parameters.mainAmplitude = float.Parse(readParameter("RMA"), NumberStyles.Any, ci) / 10000;
+            Parameters.mainAmplitude = decimal.Parse(readParameter("RMA"), NumberStyles.Any, ci) / 10000;
             Parameters.mainOffset = float.Parse(readParameter("RMO"), NumberStyles.Any, ci) / 1000;
             Parameters.mainDuty = float.Parse(readParameter("RMD"), NumberStyles.Any, ci) / 1000;
             Parameters.mainPhase = float.Parse(readParameter("RMP"), NumberStyles.Any, ci) / 1000;
@@ -126,7 +126,7 @@ namespace FY6900H_100M_PC_Software
             Parameters.auxWaveForm = readParameter("RFW");
             Parameters.auxFrequency = decimal.Parse(readParameter("RFF"), NumberStyles.Any, ci);
             //Parameters.auxFrequency = double.Parse(readParameter("RFF"), NumberStyles.Any, ci);
-            Parameters.auxAmplitude = float.Parse(readParameter("RFA"), NumberStyles.Any, ci) / 10000;
+            Parameters.auxAmplitude = decimal.Parse(readParameter("RFA"), NumberStyles.Any, ci) / 10000;
             Parameters.auxOffset = float.Parse(readParameter("RFO"), NumberStyles.Any, ci) / 1000;
             Parameters.auxDuty = float.Parse(readParameter("RFD"), NumberStyles.Any, ci) / 1000;
             Parameters.auxPhase = float.Parse(readParameter("RFP"), NumberStyles.Any, ci) / 1000;
@@ -173,7 +173,7 @@ namespace FY6900H_100M_PC_Software
 
             if (mainWaveForm.Text != waveConvertMain(Parameters.mainWaveForm)) mainWaveForm.Text = waveConvertMain(Parameters.mainWaveForm);
             if (mainFrequency.Text != frequencyNormalizeToBox(mainFreqUnit.Text, Parameters.mainFrequency)) mainFrequency.Text = frequencyNormalizeToBox(mainFreqUnit.Text, Parameters.mainFrequency);
-            if (mainAmplitude.Text != Parameters.mainAmplitude.ToString().Replace(",", ".")) mainAmplitude.Text = Parameters.mainAmplitude.ToString().Replace(",", ".");
+            if (mainAmplitude.Text != amplitudeNormalizeToBox(mainAmplitudeUnit.Text,Parameters.mainAmplitude)) mainAmplitude.Text = amplitudeNormalizeToBox(mainAmplitudeUnit.Text,Parameters.mainAmplitude);
             if (mainOffset.Text != Parameters.mainOffset.ToString().Replace(",", ".")) mainOffset.Text = Parameters.mainOffset.ToString().Replace(",", ".");
             if (mainDuty.Text != Parameters.mainDuty.ToString().Replace(",", ".")) mainDuty.Text = Parameters.mainDuty.ToString().Replace(",", ".");
             if (mainPhase.Text != Parameters.mainPhase.ToString().Replace(",", ".")) mainPhase.Text = Parameters.mainPhase.ToString().Replace(",", ".");
@@ -190,7 +190,8 @@ namespace FY6900H_100M_PC_Software
             }
             if (auxWaveForm.Text != waveConvertAux(Parameters.auxWaveForm)) auxWaveForm.Text = waveConvertAux(Parameters.auxWaveForm);
             if (auxFrequency.Text != frequencyNormalizeToBox(auxFreqUnit.Text, Parameters.auxFrequency)) auxFrequency.Text = frequencyNormalizeToBox(auxFreqUnit.Text, Parameters.auxFrequency);
-            if (auxAmplitude.Text != Parameters.auxAmplitude.ToString().Replace(",", ".")) auxAmplitude.Text = Parameters.auxAmplitude.ToString().Replace(",", ".");
+            //if (auxAmplitude.Text != Parameters.auxAmplitude.ToString().Replace(",", ".")) auxAmplitude.Text = Parameters.auxAmplitude.ToString().Replace(",", ".");
+            if (auxAmplitude.Text != amplitudeNormalizeToBox(auxAmplitudeUnit.Text, Parameters.auxAmplitude)) auxAmplitude.Text = amplitudeNormalizeToBox(auxAmplitudeUnit.Text, Parameters.auxAmplitude);
             if (auxOffset.Text != Parameters.auxOffset.ToString().Replace(",", ".")) auxOffset.Text = Parameters.auxOffset.ToString().Replace(",", ".");
             if (auxDuty.Text != Parameters.auxDuty.ToString().Replace(",", ".")) auxDuty.Text = Parameters.auxDuty.ToString().Replace(",", ".");
             if (auxPhase.Text != Parameters.auxPhase.ToString().Replace(",", ".")) auxPhase.Text = Parameters.auxPhase.ToString().Replace(",", ".");
@@ -244,7 +245,7 @@ namespace FY6900H_100M_PC_Software
             #endregion
         }
 
-        public string frequencyNormalizeToBox(string unit, decimal frequencyPar) //Used to correct display frequency in text box
+        public string frequencyNormalizeToBox(string unit, decimal frequencyPar) //Used to correct display amplitude in text box
         {
             string frequency = "";
             if (unit == "Hz") frequency = frequencyPar.ToString();
@@ -254,7 +255,7 @@ namespace FY6900H_100M_PC_Software
             if (unit == "MHz") frequency = (frequencyPar / 1000000).ToString();
             return frequency.Replace(",", ".");
         }
-        private string frequencyNormalizeToSend(string unit, string frequencyPar) //Used to form frequency string to be sent to generator
+        private string frequencyNormalizeToSend(string unit, string frequencyPar) //Used to form amplitude string to be sent to generator
         {
             decimal frequency = 0;
             string frequencyString = frequencyPar.ToString().Replace(".", ",");
@@ -269,15 +270,47 @@ namespace FY6900H_100M_PC_Software
                if (unit == "KHz") frequency *= 1000;
             else
                 if (unit == "MHz") frequency *= 1000000;
-            //if (unit == "Hz") frequency = decimal.Parse(frequencyString);
-            //else
-            //   if (unit == "KHz") frequency = decimal.Parse(frequencyString) * 1000;
-            //else
-            //    if (unit == "MHz") frequency = decimal.Parse(frequencyString) * 1000000;
-            frequencyString = frequency.ToString().Replace(",", ".");
+             frequencyString = frequency.ToString().Replace(",", ".");
             frequencyString = frequencyString.Replace("-", "");
-            if (!frequencyString.Contains(".")) frequencyString += ".0"; //Workarround on dividing frequency by 10 if numer is without "'"
+            if (!frequencyString.Contains(".")) frequencyString += ".0"; //Workarround on dividing amplitude by 10 if numer is without "'"
             return frequencyString;
+        }
+        public string amplitudeNormalizeToBox(string unit, decimal amplitudePar) //Used to correct display amplitude in text box
+        {
+            string amplitudeString = "";
+            if (unit == "V") amplitudeString = amplitudePar.ToString();
+            else
+            if (unit == "mV") amplitudeString = (amplitudePar * 1000m).ToString();
+            else
+            if (unit == "dBV") amplitudeString = (20 * Math.Log((double)amplitudePar, 10d)).ToString();
+            else
+           if (unit == "dBm") amplitudeString = (10 * Math.Log(((double)((amplitudePar * amplitudePar) / 50m / 0.001m)), 10d)).ToString(); //dBm on 50 ohm calculation
+            if(amplitudeString.Length> 9) amplitudeString = amplitudeString.Remove(9);
+            amplitudeString = amplitudeString.Replace(",", ".");
+            return amplitudeString;
+
+        }
+        private string amplitudeNormalizeToSend(string unit, string amplitudePar) //Used to form amplitude string to be sent to generator
+        {
+            decimal amplitude = 0;
+            string amplitudeString = amplitudePar.ToString().Replace(".", ",");
+            try
+            {
+                amplitude = decimal.Parse(amplitudeString);
+            }
+            catch (Exception ex) { return ""; }
+
+            if (unit == "V") amplitude *= 1;
+            else
+               if (unit == "mV") amplitude /= 1000;
+            else
+                if (unit == "dBV") amplitude = (decimal)(Math.Pow(10, (double)(amplitude / 20))); // Voltage from dBV calculation
+            else
+                if (unit == "dBm") amplitude = (decimal)(Math.Sqrt(50d/1000d) * Math.Pow(10,(double)(amplitude/20))); // Voltage from dBm on 50 ohm calculation
+            amplitudeString = amplitude.ToString().Replace(",", ".");
+            amplitudeString = amplitudeString.Replace("-", "");
+            if (!amplitudeString.Contains(".")) amplitudeString += ".0"; //Workarround on dividing amplitude by 10 if numer is without "'"
+            return amplitudeString;
         }
 
         private

@@ -30,16 +30,6 @@ namespace FY6900H_100M_PC_Software
 
         }
 
-        private void mainWaveForm_Click(object sender, EventArgs e)
-        {
-            timer1.Stop();
-        }
-
-        private void mainWaveForm_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            sendCommand("WMW" + mainWaveForm.SelectedIndex.ToString());   //Sends item number in command it must match command parameter properly
-            timer1.Start();
-        }
 
 
 
@@ -149,56 +139,64 @@ namespace FY6900H_100M_PC_Software
         {
             verifyPort("COM10");
         }
-        //private void mainFrequency_Click(object sender, EventArgs e) //Not needed
-        //{
-        //    timer1.Stop();
-        //}
 
-    private void mainFrequency_TextChanged(object sender, EventArgs e)
-        {
-            string freq = frequencyNormalizeToSend(mainFreqUnit.Text, mainFrequency.Text);
-            if (freq != "") sendCommand("WMF" + freq);
-        }
-
+        //Main On/Off control
         private void mainOnOff_Click(object sender, EventArgs e)
         {
             if (Parameters.mainOnOff == "0") sendCommand("WMN 00000255"); else sendCommand("WMN 00000000");
         }
 
-        private void auxOnOff_Click(object sender, EventArgs e)
+        //Main wave form control
+        private void mainWaveForm_Click(object sender, EventArgs e)
         {
-            if (Parameters.auxOnOff == "0") sendCommand("WFN 00000255"); else sendCommand("WFN 00000000");
+            timer1.Stop();
         }
 
+        private void mainWaveForm_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            sendCommand("WMW" + mainWaveForm.SelectedIndex.ToString());   //Sends item number in command it must match command parameter properly
+            timer1.Start();
+        }
+        //Main frequency control
+        //Main frequency unit control - Hz -> KHz -> MHz
         private void mainFreqUnit_SelectedIndexChanged(object sender, EventArgs e)
         {
             displayParameters();
         }
+        //private void mainFrequency_Click(object sender, EventArgs e) //Not needed
+        //{
+        //    timer1.Stop();
+        //}
 
-        private void auxFrequencyUnit_SelectedIndexChanged(object sender, EventArgs e)
+        private void mainFrequency_TextChanged(object sender, EventArgs e)
         {
-            displayParameters();
+            string freq = frequencyNormalizeToSend(mainFreqUnit.Text, mainFrequency.Text);
+            if (freq != "") sendCommand("WMF" + freq);
         }
-
+        //Main Amplitude control
+       private void mainAmplitude_TextChanged(object sender, EventArgs e)
+        {
+           string amplitude = amplitudeNormalizeToSend(mainAmplitudeUnit.Text, mainAmplitude.Text);
+            if (amplitude != "") sendCommand("WMA" + amplitude);
+        }
+        //Main Amplitude unit control
         private void mainAmplitudeUnit_SelectedIndexChanged(object sender, EventArgs e)
         {
             displayParameters();
         }
-
+        //Main Offset control
         private void mainOffestUnit_SelectedIndexChanged(object sender, EventArgs e)
         {
             displayParameters();
         }
 
-        private void auxAmplitudeUnit_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            displayParameters();
-        }
 
-        private void auxOffsetUnit_SelectedIndexChanged(object sender, EventArgs e)
+        //Aux On/Off control
+        private void auxOnOff_Click(object sender, EventArgs e)
         {
-            displayParameters();
+            if (Parameters.auxOnOff == "0") sendCommand("WFN 00000255"); else sendCommand("WFN 00000000");
         }
+        //Aux wave form control
         private void auxWaveForm_Click(object sender, EventArgs e)
         {
             timer1.Stop();
@@ -209,16 +207,35 @@ namespace FY6900H_100M_PC_Software
             sendCommand("WFW" + auxWaveForm.SelectedIndex.ToString());  //Sends item number in command it must match command parameter properly
             timer1.Start();
         }
-
+        //Aux frequency control
         private void auxFrequency_TextChanged(object sender, EventArgs e)
         {
             sendCommand("WFF" + frequencyNormalizeToSend(auxFreqUnit.Text, auxFrequency.Text));
         }
 
-        private void mainAmplitude_TextChanged(object sender, EventArgs e)
+        //Main frequency unit control - Hz -> KHz -> MHz
+        private void auxFrequencyUnit_SelectedIndexChanged(object sender, EventArgs e)
         {
+            displayParameters();
+        }
+        //Aux Amplitude control
+        private void auxAmplitude_TextChanged(object sender, EventArgs e)
+        {
+            string amplitude = amplitudeNormalizeToSend(auxAmplitudeUnit.Text, auxAmplitude.Text);
+            if (amplitude != "") sendCommand("WFA" + amplitude);
 
         }
+        //Aux Amplitude  unit control
+        private void auxAmplitudeUnit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            displayParameters();
+        }
+        //Aux Offset control
+        private void auxOffsetUnit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            displayParameters();
+        }
+
     }
 
 }
