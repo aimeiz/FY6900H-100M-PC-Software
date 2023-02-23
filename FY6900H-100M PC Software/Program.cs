@@ -115,6 +115,7 @@ namespace FY6900H_100M_PC_Software
             Parameters.mainFrequency = decimal.Parse(readParameter("RMF"), NumberStyles.Any, ci);
             Parameters.mainAmplitude = decimal.Parse(readParameter("RMA"), NumberStyles.Any, ci) / 10000;
             Parameters.mainOffset = convertSignedStringToDecimal(readParameter("RMO")) / 1000m;
+            Parameters.mainDuty = float.Parse(readParameter("RMD"), NumberStyles.Any, ci) / 1000;
             Parameters.mainPhase = float.Parse(readParameter("RMP"), NumberStyles.Any, ci) / 1000;
             Parameters.mainOnOff = readParameter("RMN");
             Parameters.auxWaveForm = readParameter("RFW");
@@ -313,6 +314,24 @@ namespace FY6900H_100M_PC_Software
             offsetString = offsetString.Replace(",", ".");
             return offsetString;
         }
+        private string offsetNormalizeToSend(string unit, string offsetPar) //Used to form amplitude string to be sent to generator
+        {
+            decimal offset = 0;
+            string offsetString = offsetPar.ToString().Replace(".", ",");
+            try
+            {
+                offset = decimal.Parse(offsetString);
+            }
+            catch (Exception ex) { return ""; }
+
+            if (unit == "V") offset *= 1m;
+            else
+               if (unit == "mV") offset /= 1000m;
+            offsetString = offset.ToString().Replace(",", ".");
+            if (!offsetString.Contains(".")) offsetString += ".0"; //Workarround on dividing amplitude by 10 if numer is without "'"
+            return offsetString;
+        }
+
         private static decimal convertSignedStringToDecimal(string value)
         {
             string valueString = value;
@@ -343,23 +362,6 @@ namespace FY6900H_100M_PC_Software
                 valueString = valueBinary.ToString();
             }
             return valueString;
-        }
-        private string offsetNormalizeToSend(string unit, string offsetPar) //Used to form amplitude string to be sent to generator
-        {
-            decimal offset = 0;
-            string offsetString = offsetPar.ToString().Replace(".", ",");
-            try
-            {
-                offset = decimal.Parse(offsetString);
-            }
-            catch (Exception ex) { return ""; }
-
-            if (unit == "V") offset *= 1M;
-            else
-               if (unit == "mV") offset /= 1000m;
-            offsetString = offset.ToString().Replace(",", ".");
-            if (!offsetString.Contains(".")) offsetString += ".0"; //Workarround on dividing amplitude by 10 if numer is without "'"
-            return offsetString;
         }
 
         private

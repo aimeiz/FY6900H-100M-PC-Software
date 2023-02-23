@@ -197,6 +197,16 @@ namespace FY6900H_100M_PC_Software
             displayParameters();
         }
 
+        private void mainPhase_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void mainDuty_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
 
         //Aux On/Off control
         private void auxOnOff_Click(object sender, EventArgs e)
@@ -250,6 +260,15 @@ namespace FY6900H_100M_PC_Software
             displayParameters();
         }
 
+        private void auxPhase_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void auxDuty_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }
