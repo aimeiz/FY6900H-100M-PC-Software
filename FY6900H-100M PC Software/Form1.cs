@@ -80,7 +80,7 @@ namespace FY6900H_100M_PC_Software
                 switch (timer1Phase)
                 {
                     case 0:
-                        if (changeToSend && !changeNotToSend)
+                        if (!changeNotToSend)
                         {
                             refreshParameters();
                             timer1.Interval = 1000;
@@ -170,11 +170,11 @@ namespace FY6900H_100M_PC_Software
         {
             if (!changeNotToSend)
             {
-                changeToSend = true;
+                //changeToSend = true;
                 timer1.Stop();
                 timer1.Interval = 5000;
                 timer1.Start();
-                changeToSend = true;
+                //changeToSend = true;
                 timer1Phase = 0;
             }
             //changeNotToSend = false;
@@ -215,34 +215,30 @@ namespace FY6900H_100M_PC_Software
 
         private void mainFrequency_TextChanged(object sender, EventArgs e)
         {
+            mainFrequencyChangeToSend = true;
             textChangeDelay();
         }
-        private void mainFrequencyChange()
+        private void mainFrequencyChanged()
         {
             string freq = frequencyNormalizeToSend(mainFreqUnit.Text, mainFrequency.Text);
             if (freq != "")
             {
                 sendCommand("WMF" + freq);
-                Thread.Sleep(100);
-                sendCommand("WMF" + freq);
-                Thread.Sleep(100);
-                changeToSend = false;
-                //changeNotToSend = false;
+                mainFrequencyChangeToSend = false;
             }
         }
         private void mainAmplitude_TextChanged(object sender, EventArgs e)
         {
+            mainAmplitudeChangeToSend = true;
             textChangeDelay();
         }
-        private void mainAmplitudeChange()
+        private void mainAmplitudeChanged()
         {
             string amplitude = amplitudeNormalizeToSend(mainAmplitudeUnit.Text, mainAmplitude.Text);
             if (amplitude != "")
             {
                 sendCommand("WMA" + amplitude);
-                Thread.Sleep(100);
-                sendCommand("WMA" + amplitude);
-                Thread.Sleep(100);
+                mainAmplitudeChangeToSend = false;
             }
         }
         //Main Amplitude unit control
@@ -254,9 +250,18 @@ namespace FY6900H_100M_PC_Software
         //Main Offset control
         private void mainOffset_TextChanged(object sender, EventArgs e)
         {
-            string offset = offsetNormalizeToSend(mainOffsetUnit.Text, mainOffset.Text);
-            if (offset != "") sendCommand("WMO" + offset);
+            mainOffsetChangeToSend = true;
+            textChangeDelay();
 
+        }
+        private void mainOffsetChanged()
+        {
+            string offset = offsetNormalizeToSend(mainOffsetUnit.Text, mainOffset.Text);
+            if (offset != "")
+            {
+                sendCommand("WMO" + offset);
+                mainOffsetChangeToSend = false;
+            }
         }
         //Main Offset unit control
         private void mainOffsetUnit_SelectedIndexChanged(object sender, EventArgs e)
@@ -268,16 +273,32 @@ namespace FY6900H_100M_PC_Software
         //Main Phase control
         private void mainPhase_TextChanged(object sender, EventArgs e)
         {
-            string phase = phaseNormalizeToSend(mainPhase.Text);
-            if (phase != "") sendCommand("WMP" + phase);
+            mainPhaseChangeToSend = true;
+            textChangeDelay();
         }
-
+        private void mainPhaseChanged()
+        {
+            string phase = phaseNormalizeToSend(mainPhase.Text);
+            if (phase != "")
+            {
+                sendCommand("WMP" + phase);
+                mainPhaseChangeToSend = false;
+            }
+        }
         //Main Duty control
         private void mainDuty_TextChanged(object sender, EventArgs e)
         {
+            mainDutyChangeToSend = true;
+            textChangeDelay();
+        }
+        private void mainDutyChanged()
+        {
             string duty = dutyNormalizeToSend(mainDuty.Text);
-            if (duty != "") sendCommand("WMD" + duty);
-
+            if (duty != "")
+            {
+                sendCommand("WMD" + duty);
+                mainDutyChangeToSend = false;
+            }
         }
 
 
@@ -300,20 +321,17 @@ namespace FY6900H_100M_PC_Software
         //Aux frequency control
         private void auxFrequency_TextChanged(object sender, EventArgs e)
         {
+            auxFrequencyChangeToSend = true;
             textChangeDelay();
-         }
+        }
 
-        private void auxFrequencyChange()
+        private void auxFrequencyChanged()
         {
             string freq = frequencyNormalizeToSend(auxFreqUnit.Text, auxFrequency.Text);
             if (freq != "")
             {
                 sendCommand("WFF" + freq);
-                Thread.Sleep(100);
-                sendCommand("WFF" + freq);
-                Thread.Sleep(100);
-                changeToSend = false;
-                //changeNotToSend = false;
+                auxFrequencyChangeToSend = false;
             }
         }
 
@@ -326,17 +344,16 @@ namespace FY6900H_100M_PC_Software
         //Aux Amplitude control
         private void auxAmplitude_TextChanged(object sender, EventArgs e)
         {
+            auxAmplitudeChangeToSend = true;
             textChangeDelay();
         }
-        private void auxAmplitudeChange()
+        private void auxAmplitudeChanged()
         {
             string amplitude = amplitudeNormalizeToSend(auxAmplitudeUnit.Text, auxAmplitude.Text);
             if (amplitude != "")
             {
                 sendCommand("WFA" + amplitude);
-                Thread.Sleep(100);
-                sendCommand("WFA" + amplitude);
-                Thread.Sleep(100);
+                auxAmplitudeChangeToSend = false;
             }
         }
 
@@ -349,9 +366,17 @@ namespace FY6900H_100M_PC_Software
         //Aux Offset control
         private void auxOffset_TextChanged(object sender, EventArgs e)
         {
+            auxOffsetChangeToSend = true;
+            textChangeDelay();
+        }
+        private void auxOffsetChanged()
+        {
             string offset = offsetNormalizeToSend(auxOffsetUnit.Text, auxOffset.Text);
-            if (offset != "") sendCommand("WFO" + offset);
-
+            if (offset != "")
+            {
+                sendCommand("WFO" + offset);
+                auxOffsetChangeToSend = false;
+            }
         }
         //Aux  Offset unit control
         private void auxOffsetUnit_SelectedIndexChanged(object sender, EventArgs e)
@@ -363,16 +388,37 @@ namespace FY6900H_100M_PC_Software
         //Aux Phase control
         private void auxPhase_TextChanged(object sender, EventArgs e)
         {
+            auxPhaseChangeToSend = true;
+            textChangeDelay();
+        }
+        private void auxPhaseChanged()
+        {
             string phase = phaseNormalizeToSend(auxPhase.Text);
-            if (phase != "") sendCommand("WFP" + phase);
-
+            if (phase != "")
+            {
+                sendCommand("WFP" + phase);
+                auxPhaseChangeToSend = false;
+            }
         }
 
         //Aux Duty control
         private void auxDuty_TextChanged(object sender, EventArgs e)
         {
+            auxDutyChangeToSend = true;
+            textChangeDelay();
+         }
+        private void auxDutyChanged()
+        {
             string duty = dutyNormalizeToSend(auxDuty.Text);
-            if (duty != "") sendCommand("WFD" + duty);
+            if (duty != "")
+            {
+                sendCommand("WFD" + duty);
+                auxDutyChangeToSend = false;
+            }
+        }
+
+        private void comport_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }

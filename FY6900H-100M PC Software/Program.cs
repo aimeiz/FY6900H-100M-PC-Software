@@ -23,17 +23,23 @@ namespace FY6900H_100M_PC_Software
     //     class SerialPortIO 75.2
     public partial class Form1 : Form
     {
-        //static bool _continue;
         public static SerialPort _serialPort;
-        private static bool changeToSend = false; //
-        private static bool changeNotToSend = true; //
         private static UInt16 timer1Phase = 1;
+        private static bool changeNotToSend = true; //
+        private static bool mainFrequencyChangeToSend = false;
+        private static bool auxFrequencyChangeToSend = false;
+        private static bool mainAmplitudeChangeToSend = false;
+        private static bool auxAmplitudeChangeToSend = false;
+        private static bool mainOffsetChangeToSend = false;
+        private static bool auxOffsetChangeToSend = false;
+        private static bool mainPhaseChangeToSend = false;
+        private static bool auxPhaseChangeToSend = false;
+        private static bool mainDutyChangeToSend = false;
+        private static bool auxDutyChangeToSend = false;
 
-        //static string message = "";
         private struct Parameters
         {
             public static string mainWaveForm;
-            //public static double mainFrequency;
             public static decimal mainFrequency;
             public static decimal mainAmplitude;
             public static decimal mainOffset;
@@ -41,7 +47,6 @@ namespace FY6900H_100M_PC_Software
             public static decimal mainPhase;
             public static string mainOnOff;
             public static string auxWaveForm;
-            //public static double auxFrequency;
             public static decimal auxFrequency;
             public static decimal auxAmplitude;
             public static decimal auxOffset;
@@ -86,7 +91,6 @@ namespace FY6900H_100M_PC_Software
         }
 
 
-        //       public static void sendCommand(string command)
         private void sendCommand(string command)
         {
             timer1.Stop();
@@ -94,8 +98,12 @@ namespace FY6900H_100M_PC_Software
             {
                 _serialPort.Open();
                 _serialPort.Write(command + "\r\n");
+                Thread.Sleep(100);
+                _serialPort.Write(command + "\r\n");
+                Thread.Sleep(100);
+                _serialPort.Write(command + "\r\n");
+                Thread.Sleep(100);
                 _serialPort.Close();
-                readParameters();
                 timer1.Start();
             }
         }
@@ -109,7 +117,6 @@ namespace FY6900H_100M_PC_Software
         }
         private static void readParameters()
         {
-            //            changeToSend = false; //Assume no change
             CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
             ci.NumberFormat.CurrencyDecimalSeparator = ".";
             _serialPort.Open();
@@ -166,7 +173,6 @@ namespace FY6900H_100M_PC_Software
 
         private void displayParameters()
         {
-            //changeNotToSend = true;
             if (mainWaveForm.Text != waveConvertMain(Parameters.mainWaveForm)) mainWaveForm.Text = waveConvertMain(Parameters.mainWaveForm);
             if (mainFrequency.Text != frequencyNormalizeToBox(mainFreqUnit.Text, Parameters.mainFrequency)) mainFrequency.Text = frequencyNormalizeToBox(mainFreqUnit.Text, Parameters.mainFrequency);
             if (mainAmplitude.Text != amplitudeNormalizeToBox(mainAmplitudeUnit.Text, Parameters.mainAmplitude)) mainAmplitude.Text = amplitudeNormalizeToBox(mainAmplitudeUnit.Text, Parameters.mainAmplitude);
@@ -185,7 +191,6 @@ namespace FY6900H_100M_PC_Software
             }
             if (auxWaveForm.Text != waveConvertAux(Parameters.auxWaveForm)) auxWaveForm.Text = waveConvertAux(Parameters.auxWaveForm);
             if (auxFrequency.Text != frequencyNormalizeToBox(auxFreqUnit.Text, Parameters.auxFrequency)) auxFrequency.Text = frequencyNormalizeToBox(auxFreqUnit.Text, Parameters.auxFrequency);
-            //if (auxAmplitude.Text != Parameters.auxAmplitude.ToString().Replace(",", ".")) auxAmplitude.Text = Parameters.auxAmplitude.ToString().Replace(",", ".");
             if (auxAmplitude.Text != amplitudeNormalizeToBox(auxAmplitudeUnit.Text, Parameters.auxAmplitude)) auxAmplitude.Text = amplitudeNormalizeToBox(auxAmplitudeUnit.Text, Parameters.auxAmplitude);
             if (auxOffset.Text != offsetNormalizeToBox(auxOffsetUnit.Text, Parameters.auxOffset)) auxOffset.Text = offsetNormalizeToBox(auxOffsetUnit.Text, Parameters.auxOffset);
             if (auxDuty.Text != Parameters.auxDuty.ToString().Replace(",", ".")) auxDuty.Text = Parameters.auxDuty.ToString().Replace(",", ".");
@@ -201,7 +206,7 @@ namespace FY6900H_100M_PC_Software
                 auxOnOff.Text = "CH2 On";
                 auxOnOff.BackColor = Color.LimeGreen;
             }
-            //changeNotToSend = false;
+        }
             #region
             //Console.WriteLine(" mainTriggerMode " + Parameters.mainTriggerMode);
             //Console.WriteLine(" mainTriggerSource " + Parameters.mainTriggerSource);
@@ -238,22 +243,24 @@ namespace FY6900H_100M_PC_Software
             //Console.WriteLine(" localID " + Parameters.localID);
             //Console.WriteLine(" model " + Parameters.model);
             #endregion
-        }
 
-        private void refreshParameters() //reads changted parameters from boxes
+        private void refreshParameters() //reads changed parameters from boxes
         {
-            //if (changeToSend)
-            //{
-                mainFrequencyChange();
-                auxFrequencyChange();
-                mainAmplitudeChange();
-                auxAmplitudeChange();
-            //}
+            if (mainFrequencyChangeToSend) mainFrequencyChanged();
+            if (mainAmplitudeChangeToSend) mainAmplitudeChanged();
+            if (mainOffsetChangeToSend) mainOffsetChanged();
+            if (mainPhaseChangeToSend) mainPhaseChanged();
+            if (mainDutyChangeToSend) mainDutyChanged();
+            if (auxFrequencyChangeToSend) auxFrequencyChanged();
+            if (auxAmplitudeChangeToSend) auxAmplitudeChanged();
+            if (auxOffsetChangeToSend) auxOffsetChanged();
+            if (auxPhaseChangeToSend) auxPhaseChanged();
+            if (auxDutyChangeToSend) auxDutyChanged();
         }
 
 
 
-        private string frequencyNormalizeToBox(string unit, decimal frequencyPar) //Used to correct display amplitude in text box
+        private string frequencyNormalizeToBox(string unit, decimal frequencyPar) //Used to correct display frequency in text box
         {
             string frequency = "";
             if (unit == "Hz") frequency = frequencyPar.ToString();
@@ -263,12 +270,10 @@ namespace FY6900H_100M_PC_Software
             if (unit == "MHz") frequency = (frequencyPar / 1000000).ToString();
             return frequency.Replace(",", ".");
         }
-        private string frequencyNormalizeToSend(string unit, string frequencyPar) //Used to form amplitude string to be sent to generator
+        private string frequencyNormalizeToSend(string unit, string frequencyPar) //Used to form frequency string to be sent to generator
         {
             decimal frequency = 0;
-            //           string frequencyString = frequencyPar.ToString().Replace(".", ",");
             string frequencyString = frequencyPar.Replace(".", ",");
-            //string frequencyString = frequencyPar;
             try
             {
                 frequency = decimal.Parse(frequencyString);
@@ -303,7 +308,6 @@ namespace FY6900H_100M_PC_Software
         private string amplitudeNormalizeToSend(string unit, string amplitudePar) //Used to form amplitude string to be sent to generator
         {
             decimal amplitude = 0;
-            //            string amplitudeString = amplitudePar.ToString().Replace(".", ",");
             string amplitudeString = amplitudePar.Replace(".", ",");
             try
             {
@@ -361,7 +365,7 @@ namespace FY6900H_100M_PC_Software
             }
             catch (Exception ex) { return ""; }
             //           if (!phaseString.Contains(".")) phaseString += ".0"; //Workarround on dividing by 10 if numer is without "'"
-            return phaseString;
+            return phaseString.Replace(",", ".");
         }
         private string dutyNormalizeToSend(string dutyPar)
         {
@@ -373,7 +377,7 @@ namespace FY6900H_100M_PC_Software
             }
             catch (Exception ex) { return ""; }
             //           if (!dutyString.Contains(".")) dutyString += ".0"; //Workarround on dividing by 10 if numer is without "'"
-            return dutyString;
+            return dutyString.Replace(",", ".");
         }
 
         private static decimal convertSignedStringToDecimal(string value)
