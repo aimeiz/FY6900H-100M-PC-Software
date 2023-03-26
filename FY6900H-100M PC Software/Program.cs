@@ -20,12 +20,14 @@ namespace FY6900H_100M_PC_Software
             Application.Run(new Form1());
         }
     }
-    //     class SerialPortIO
+    //     class SerialPortIO 75.2
     public partial class Form1 : Form
     {
         //static bool _continue;
         public static SerialPort _serialPort;
-        private static bool changed; //
+        private static bool changeToSend = false; //
+        private static bool changeNotToSend = true; //
+        private static UInt16 timer1Phase = 1;
 
         //static string message = "";
         private struct Parameters
@@ -35,16 +37,16 @@ namespace FY6900H_100M_PC_Software
             public static decimal mainFrequency;
             public static decimal mainAmplitude;
             public static decimal mainOffset;
-            public static float mainDuty;
-            public static float mainPhase;
+            public static decimal mainDuty;
+            public static decimal mainPhase;
             public static string mainOnOff;
             public static string auxWaveForm;
             //public static double auxFrequency;
             public static decimal auxFrequency;
             public static decimal auxAmplitude;
             public static decimal auxOffset;
-            public static float auxDuty;
-            public static float auxPhase;
+            public static decimal auxDuty;
+            public static decimal auxPhase;
             public static string auxOnOff;
             public static string mainTriggerMode;
             public static string mainTriggerSource;
@@ -91,7 +93,7 @@ namespace FY6900H_100M_PC_Software
             if (Parameters.port != "" && Parameters.model.Contains("FY6900"))
             {
                 _serialPort.Open();
-                _serialPort.Write(command + "\n");
+                _serialPort.Write(command + "\r\n");
                 _serialPort.Close();
                 readParameters();
                 timer1.Start();
@@ -107,7 +109,7 @@ namespace FY6900H_100M_PC_Software
         }
         private static void readParameters()
         {
-            changed = false; //Assume no change
+            //            changeToSend = false; //Assume no change
             CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
             ci.NumberFormat.CurrencyDecimalSeparator = ".";
             _serialPort.Open();
@@ -115,15 +117,15 @@ namespace FY6900H_100M_PC_Software
             Parameters.mainFrequency = decimal.Parse(readParameter("RMF"), NumberStyles.Any, ci);
             Parameters.mainAmplitude = decimal.Parse(readParameter("RMA"), NumberStyles.Any, ci) / 10000;
             Parameters.mainOffset = convertSignedStringToDecimal(readParameter("RMO")) / 1000m;
-            Parameters.mainDuty = float.Parse(readParameter("RMD"), NumberStyles.Any, ci) / 1000;
-            Parameters.mainPhase = float.Parse(readParameter("RMP"), NumberStyles.Any, ci) / 1000;
+            Parameters.mainDuty = decimal.Parse(readParameter("RMD"), NumberStyles.Any, ci) / 1000;
+            Parameters.mainPhase = decimal.Parse(readParameter("RMP"), NumberStyles.Any, ci) / 1000;
             Parameters.mainOnOff = readParameter("RMN");
             Parameters.auxWaveForm = readParameter("RFW");
             Parameters.auxFrequency = decimal.Parse(readParameter("RFF"), NumberStyles.Any, ci);
             Parameters.auxAmplitude = decimal.Parse(readParameter("RFA"), NumberStyles.Any, ci) / 10000;
             Parameters.auxOffset = convertSignedStringToDecimal(readParameter("RFO")) / 1000m;
-            Parameters.auxDuty = float.Parse(readParameter("RFD"), NumberStyles.Any, ci) / 1000;
-            Parameters.auxPhase = float.Parse(readParameter("RFP"), NumberStyles.Any, ci) / 1000;
+            Parameters.auxDuty = decimal.Parse(readParameter("RFD"), NumberStyles.Any, ci) / 1000;
+            Parameters.auxPhase = decimal.Parse(readParameter("RFP"), NumberStyles.Any, ci) / 1000;
             Parameters.auxOnOff = readParameter("RFN");
             Parameters.mainTriggerMode = readParameter("RPF");
             Parameters.mainTriggerSource = readParameter("RPM");
@@ -164,7 +166,7 @@ namespace FY6900H_100M_PC_Software
 
         private void displayParameters()
         {
-
+            //changeNotToSend = true;
             if (mainWaveForm.Text != waveConvertMain(Parameters.mainWaveForm)) mainWaveForm.Text = waveConvertMain(Parameters.mainWaveForm);
             if (mainFrequency.Text != frequencyNormalizeToBox(mainFreqUnit.Text, Parameters.mainFrequency)) mainFrequency.Text = frequencyNormalizeToBox(mainFreqUnit.Text, Parameters.mainFrequency);
             if (mainAmplitude.Text != amplitudeNormalizeToBox(mainAmplitudeUnit.Text, Parameters.mainAmplitude)) mainAmplitude.Text = amplitudeNormalizeToBox(mainAmplitudeUnit.Text, Parameters.mainAmplitude);
@@ -199,6 +201,7 @@ namespace FY6900H_100M_PC_Software
                 auxOnOff.Text = "CH2 On";
                 auxOnOff.BackColor = Color.LimeGreen;
             }
+            //changeNotToSend = false;
             #region
             //Console.WriteLine(" mainTriggerMode " + Parameters.mainTriggerMode);
             //Console.WriteLine(" mainTriggerSource " + Parameters.mainTriggerSource);
@@ -237,6 +240,19 @@ namespace FY6900H_100M_PC_Software
             #endregion
         }
 
+        private void refreshParameters() //reads changted parameters from boxes
+        {
+            //if (changeToSend)
+            //{
+                mainFrequencyChange();
+                auxFrequencyChange();
+                mainAmplitudeChange();
+                auxAmplitudeChange();
+            //}
+        }
+
+
+
         private string frequencyNormalizeToBox(string unit, decimal frequencyPar) //Used to correct display amplitude in text box
         {
             string frequency = "";
@@ -250,24 +266,27 @@ namespace FY6900H_100M_PC_Software
         private string frequencyNormalizeToSend(string unit, string frequencyPar) //Used to form amplitude string to be sent to generator
         {
             decimal frequency = 0;
-            string frequencyString = frequencyPar.ToString().Replace(".", ",");
+            //           string frequencyString = frequencyPar.ToString().Replace(".", ",");
+            string frequencyString = frequencyPar.Replace(".", ",");
+            //string frequencyString = frequencyPar;
             try
             {
                 frequency = decimal.Parse(frequencyString);
             }
             catch (Exception ex) { return ""; }
-
-            if (unit == "Hz") frequency *= 1;
+            if (frequency > 100000000M) frequency = 100000000M; //Frequency limit to 100MHz
+            if (unit == "Hz") frequency *= 1M;
             else
-               if (unit == "KHz") frequency *= 1000;
+               if (unit == "KHz") frequency *= 1000M;
             else
-                if (unit == "MHz") frequency *= 1000000;
+                if (unit == "MHz") frequency *= 1000000M;
             frequencyString = frequency.ToString().Replace(",", ".");
             frequencyString = frequencyString.Replace("-", "");
-            if (!frequencyString.Contains(".")) frequencyString += ".0"; //Workarround on dividing amplitude by 10 if numer is without "'"
+            if (!frequencyString.Contains(".")) frequencyString += ".0"; //Workarround on dividing frequency by 10 if numer is without ","
+            if (frequencyString.Length > 16) frequencyString = frequencyString.Substring(0, 16); //Limit freqencyString to 15 characters
             return frequencyString;
         }
-        private string amplitudeNormalizeToBox(string unit, decimal amplitudePar) //Used to correct display amplitude in text box
+        private string amplitudeNormalizeToBox(string unit, decimal amplitudePar) //Used to correct display frequency in text box
         {
             string amplitudeString = "";
             if (unit == "V") amplitudeString = amplitudePar.ToString();
@@ -284,7 +303,8 @@ namespace FY6900H_100M_PC_Software
         private string amplitudeNormalizeToSend(string unit, string amplitudePar) //Used to form amplitude string to be sent to generator
         {
             decimal amplitude = 0;
-            string amplitudeString = amplitudePar.ToString().Replace(".", ",");
+            //            string amplitudeString = amplitudePar.ToString().Replace(".", ",");
+            string amplitudeString = amplitudePar.Replace(".", ",");
             try
             {
                 amplitude = decimal.Parse(amplitudeString);
@@ -328,8 +348,32 @@ namespace FY6900H_100M_PC_Software
             else
                if (unit == "mV") offset /= 1000m;
             offsetString = offset.ToString().Replace(",", ".");
-            if (!offsetString.Contains(".")) offsetString += ".0"; //Workarround on dividing amplitude by 10 if numer is without "'"
+            if (!offsetString.Contains(".")) offsetString += ".0"; //Workarround on dividing by 10 if numer is without "'"
             return offsetString;
+        }
+        private string phaseNormalizeToSend(string phasePar)
+        {
+            decimal phase = 0;
+            string phaseString = phasePar.ToString().Replace(".", ",");
+            try
+            {
+                phase = decimal.Parse(phaseString);
+            }
+            catch (Exception ex) { return ""; }
+            //           if (!phaseString.Contains(".")) phaseString += ".0"; //Workarround on dividing by 10 if numer is without "'"
+            return phaseString;
+        }
+        private string dutyNormalizeToSend(string dutyPar)
+        {
+            decimal duty = 0;
+            string dutyString = dutyPar.ToString().Replace(".", ",");
+            try
+            {
+                duty = decimal.Parse(dutyString);
+            }
+            catch (Exception ex) { return ""; }
+            //           if (!dutyString.Contains(".")) dutyString += ".0"; //Workarround on dividing by 10 if numer is without "'"
+            return dutyString;
         }
 
         private static decimal convertSignedStringToDecimal(string value)
@@ -346,6 +390,7 @@ namespace FY6900H_100M_PC_Software
                 valueDecimal = ((decimal)valueBinary);
             return valueDecimal;
         }
+
         private string convertDecimalToSignedString(decimal valuedecimal)
         {
             string valueString = "";
