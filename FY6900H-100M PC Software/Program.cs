@@ -23,6 +23,7 @@ namespace FY6900H_100M_PC_Software
     //     class SerialPortIO 75.2
     public partial class Form1 : Form
     {
+
         public static SerialPort _serialPort;
         private static UInt16 timer1Phase = 1;
         private static bool changeNotToSend = true; //
@@ -115,6 +116,7 @@ namespace FY6900H_100M_PC_Software
             buffer = _serialPort.ReadExisting();
             return reply;
         }
+
         private static void readParameters()
         {
             CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
@@ -173,12 +175,16 @@ namespace FY6900H_100M_PC_Software
 
         private void displayParameters()
         {
+            CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+            ci.NumberFormat.CurrencyDecimalSeparator = ".";
             if (mainWaveForm.Text != waveConvertMain(Parameters.mainWaveForm)) mainWaveForm.Text = waveConvertMain(Parameters.mainWaveForm);
             if (mainFrequency.Text != frequencyNormalizeToBox(mainFreqUnit.Text, Parameters.mainFrequency)) mainFrequency.Text = frequencyNormalizeToBox(mainFreqUnit.Text, Parameters.mainFrequency);
             if (mainAmplitude.Text != amplitudeNormalizeToBox(mainAmplitudeUnit.Text, Parameters.mainAmplitude)) mainAmplitude.Text = amplitudeNormalizeToBox(mainAmplitudeUnit.Text, Parameters.mainAmplitude);
             if (mainOffset.Text != offsetNormalizeToBox(mainOffsetUnit.Text, Parameters.mainOffset)) mainOffset.Text = offsetNormalizeToBox(mainOffsetUnit.Text, Parameters.mainOffset);
-            if (mainDuty.Text != Parameters.mainDuty.ToString().Replace(",", ".")) mainDuty.Text = Parameters.mainDuty.ToString().Replace(",", ".");
-            if (mainPhase.Text != Parameters.mainPhase.ToString().Replace(",", ".")) mainPhase.Text = Parameters.mainPhase.ToString().Replace(",", ".");
+            //if (mainDuty.Text != Parameters.mainDuty.ToString().Replace(",", ".")) mainDuty.Text = Parameters.mainDuty.ToString().Replace(",", ".");
+            //if (mainPhase.Text != Parameters.mainPhase.ToString().Replace(",", ".")) mainPhase.Text = Parameters.mainPhase.ToString().Replace(",", ".");
+            if (mainDuty.Text != Parameters.mainDuty.ToString()) mainDuty.Text = Parameters.mainDuty.ToString();
+            if (mainPhase.Text != Parameters.mainPhase.ToString()) mainPhase.Text = Parameters.mainPhase.ToString();
             if (Parameters.mainOnOff == "0")
             {
                 mainOnOff.Text = "CH1 Off";
@@ -193,8 +199,10 @@ namespace FY6900H_100M_PC_Software
             if (auxFrequency.Text != frequencyNormalizeToBox(auxFreqUnit.Text, Parameters.auxFrequency)) auxFrequency.Text = frequencyNormalizeToBox(auxFreqUnit.Text, Parameters.auxFrequency);
             if (auxAmplitude.Text != amplitudeNormalizeToBox(auxAmplitudeUnit.Text, Parameters.auxAmplitude)) auxAmplitude.Text = amplitudeNormalizeToBox(auxAmplitudeUnit.Text, Parameters.auxAmplitude);
             if (auxOffset.Text != offsetNormalizeToBox(auxOffsetUnit.Text, Parameters.auxOffset)) auxOffset.Text = offsetNormalizeToBox(auxOffsetUnit.Text, Parameters.auxOffset);
-            if (auxDuty.Text != Parameters.auxDuty.ToString().Replace(",", ".")) auxDuty.Text = Parameters.auxDuty.ToString().Replace(",", ".");
-            if (auxPhase.Text != Parameters.auxPhase.ToString().Replace(",", ".")) auxPhase.Text = Parameters.auxPhase.ToString().Replace(",", ".");
+            //if (auxDuty.Text != Parameters.auxDuty.ToString().Replace(",", ".")) auxDuty.Text = Parameters.auxDuty.ToString().Replace(",", ".");
+            //if (auxPhase.Text != Parameters.auxPhase.ToString().Replace(",", ".")) auxPhase.Text = Parameters.auxPhase.ToString().Replace(",", ".");
+            if (auxDuty.Text != Parameters.auxDuty.ToString()) auxDuty.Text = Parameters.auxDuty.ToString();
+            if (auxPhase.Text != Parameters.auxPhase.ToString()) auxPhase.Text = Parameters.auxPhase.ToString();
             auxOnOff.Text = Parameters.auxOnOff;
             if (Parameters.auxOnOff == "0")
             {
@@ -262,21 +270,27 @@ namespace FY6900H_100M_PC_Software
 
         private string frequencyNormalizeToBox(string unit, decimal frequencyPar) //Used to correct display frequency in text box
         {
+            CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+            ci.NumberFormat.CurrencyDecimalSeparator = ".";
             string frequency = "";
             if (unit == "Hz") frequency = frequencyPar.ToString();
             else
             if (unit == "KHz") frequency = (frequencyPar / 1000).ToString();
             else
             if (unit == "MHz") frequency = (frequencyPar / 1000000).ToString();
-            return frequency.Replace(",", ".");
+            //return frequency.Replace(",", ".");
+            return frequency;
         }
         private string frequencyNormalizeToSend(string unit, string frequencyPar) //Used to form frequency string to be sent to generator
         {
+            CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+            ci.NumberFormat.CurrencyDecimalSeparator = ".";
             decimal frequency = 0;
-            string frequencyString = frequencyPar.Replace(".", ",");
+            //string frequencyString = frequencyPar.Replace(".", ",");
+            string frequencyString = frequencyPar;
             try
             {
-                frequency = decimal.Parse(frequencyString);
+                frequency = decimal.Parse(frequencyString, NumberStyles.Any, ci);
             }
             catch (Exception ex) { return ""; }
             if (frequency > 100000000M) frequency = 100000000M; //Frequency limit to 100MHz
@@ -285,7 +299,8 @@ namespace FY6900H_100M_PC_Software
                if (unit == "KHz") frequency *= 1000M;
             else
                 if (unit == "MHz") frequency *= 1000000M;
-            frequencyString = frequency.ToString().Replace(",", ".");
+            //frequencyString = frequency.ToString().Replace(",", ".");
+            frequencyString = frequency.ToString();
             frequencyString = frequencyString.Replace("-", "");
             if (!frequencyString.Contains(".")) frequencyString += ".0"; //Workarround on dividing frequency by 10 if numer is without ","
             if (frequencyString.Length > 16) frequencyString = frequencyString.Substring(0, 16); //Limit freqencyString to 15 characters
@@ -293,6 +308,8 @@ namespace FY6900H_100M_PC_Software
         }
         private string amplitudeNormalizeToBox(string unit, decimal amplitudePar) //Used to correct display frequency in text box
         {
+            CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+            ci.NumberFormat.CurrencyDecimalSeparator = ".";
             string amplitudeString = "";
             if (unit == "V") amplitudeString = amplitudePar.ToString();
             else
@@ -302,16 +319,19 @@ namespace FY6900H_100M_PC_Software
             else
            if (unit == "dBm") amplitudeString = (10 * Math.Log(((double)((amplitudePar * amplitudePar) / 50m / 0.001m)), 10d)).ToString(); //dBm on 50 ohm calculation
             if (amplitudeString.Length > 9) amplitudeString = amplitudeString.Remove(9);
-            amplitudeString = amplitudeString.Replace(",", ".");
+            //amplitudeString = amplitudeString.Replace(",", ".");
             return amplitudeString;
         }
         private string amplitudeNormalizeToSend(string unit, string amplitudePar) //Used to form amplitude string to be sent to generator
         {
+            CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+            ci.NumberFormat.CurrencyDecimalSeparator = ".";
             decimal amplitude = 0;
-            string amplitudeString = amplitudePar.Replace(".", ",");
+            //string amplitudeString = amplitudePar.Replace(".", ",");
+            string amplitudeString = amplitudePar;
             try
             {
-                amplitude = decimal.Parse(amplitudeString);
+                amplitude = decimal.Parse(amplitudeString, NumberStyles.Any, ci);
             }
             catch (Exception ex) { return ""; }
 
@@ -322,62 +342,78 @@ namespace FY6900H_100M_PC_Software
                 if (unit == "dBV") amplitude = (decimal)(Math.Pow(10, (double)(amplitude / 20))); // Voltage from dBV calculation
             else
                 if (unit == "dBm") amplitude = (decimal)(Math.Sqrt(50d / 1000d) * Math.Pow(10, (double)(amplitude / 20))); // Voltage from dBm on 50 ohm calculation
-            amplitudeString = amplitude.ToString().Replace(",", ".");
+            //amplitudeString = amplitude.ToString().Replace(",", ".");
+            amplitudeString = amplitude.ToString();
             amplitudeString = amplitudeString.Replace("-", "");
             if (!amplitudeString.Contains(".")) amplitudeString += ".0"; //Workarround on dividing amplitude by 10 if numer is without "'"
             return amplitudeString;
         }
         private string offsetNormalizeToBox(string unit, decimal offsetPar) //Used to correct display amplitude in text box
         {
+            CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+            ci.NumberFormat.CurrencyDecimalSeparator = ".";
             string offsetString = "";
             if (unit == "V") offsetString = offsetPar.ToString();
             else
             if (unit == "mV") offsetString = (offsetPar * 1000m).ToString("F" + 0); // in mV no decimal places
             else
             if (offsetString.Length > 9) offsetString = offsetString.Remove(9);
-            offsetString = offsetString.Replace(",", ".");
+            //offsetString = offsetString.Replace(",", ".");
             return offsetString;
         }
         private string offsetNormalizeToSend(string unit, string offsetPar) //Used to form amplitude string to be sent to generator
         {
+            CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+            ci.NumberFormat.CurrencyDecimalSeparator = ".";
             decimal offset = 0;
-            string offsetString = offsetPar.ToString().Replace(".", ",");
+            //string offsetString = offsetPar.ToString().Replace(".", ",");
+            string offsetString = offsetPar.ToString();
             try
             {
-                offset = decimal.Parse(offsetString);
+                offset = decimal.Parse(offsetString, NumberStyles.Any, ci);
             }
             catch (Exception ex) { return ""; }
 
             if (unit == "V") offset *= 1m;
             else
                if (unit == "mV") offset /= 1000m;
-            offsetString = offset.ToString().Replace(",", ".");
+            //offsetString = offset.ToString().Replace(",", ".");
+            offsetString = offset.ToString();
             if (!offsetString.Contains(".")) offsetString += ".0"; //Workarround on dividing by 10 if numer is without "'"
-            return offsetString;
+             return offsetString;
         }
         private string phaseNormalizeToSend(string phasePar)
         {
+            CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+            ci.NumberFormat.CurrencyDecimalSeparator = ".";
             decimal phase = 0;
-            string phaseString = phasePar.ToString().Replace(".", ",");
+            //string phaseString = phasePar.ToString().Replace(".", ",");
+            string phaseString = phasePar.ToString();
             try
             {
-                phase = decimal.Parse(phaseString);
+                phase = decimal.Parse(phaseString, NumberStyles.Any, ci);
             }
             catch (Exception ex) { return ""; }
             //           if (!phaseString.Contains(".")) phaseString += ".0"; //Workarround on dividing by 10 if numer is without "'"
-            return phaseString.Replace(",", ".");
+            //return phaseString.Replace(",", ".");
+            phaseString= phaseString.Replace("-", "");
+            return phaseString;
         }
         private string dutyNormalizeToSend(string dutyPar)
         {
+            CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+            ci.NumberFormat.CurrencyDecimalSeparator = ".";
             decimal duty = 0;
-            string dutyString = dutyPar.ToString().Replace(".", ",");
+            //string dutyString = dutyPar.ToString().Replace(".", ",");
+            string dutyString = dutyPar.ToString();
             try
             {
-                duty = decimal.Parse(dutyString);
+                duty = decimal.Parse(dutyString, NumberStyles.Any, ci);
             }
             catch (Exception ex) { return ""; }
             //           if (!dutyString.Contains(".")) dutyString += ".0"; //Workarround on dividing by 10 if numer is without "'"
-            return dutyString.Replace(",", ".");
+            //return dutyString.Replace(",", ".");
+            return dutyString;
         }
 
         private static decimal convertSignedStringToDecimal(string value)
@@ -829,6 +865,7 @@ namespace FY6900H_100M_PC_Software
             // Create a new SerialPort object with settings below.
             _serialPort = new SerialPort();
             // Set the read/write timeouts
+
             _serialPort.ReadTimeout = 1000;
             _serialPort.WriteTimeout = 1000;
             foreach (string s in SerialPort.GetPortNames())

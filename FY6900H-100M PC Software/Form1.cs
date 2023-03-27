@@ -46,6 +46,8 @@ namespace FY6900H_100M_PC_Software
         {
             comport.Text = "Searching";
             model.Text = "Not known";
+            model.BackColor = Color.Yellow;
+            comport.BackColor = Color.Yellow;
             selectPort();
             model.Text = Parameters.model;
             comport.Text = Parameters.port;
@@ -83,7 +85,7 @@ namespace FY6900H_100M_PC_Software
                         if (!changeNotToSend)
                         {
                             refreshParameters();
-                            timer1.Interval = 1000;
+                            timer1.Interval = 500;
                         }
                         timer1Phase = 1;
                         break;
