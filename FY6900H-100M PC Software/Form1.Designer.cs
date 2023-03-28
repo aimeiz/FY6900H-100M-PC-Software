@@ -34,16 +34,7 @@
             this.waveformProcessingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.portConnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoConnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cOM1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cOM2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cOM3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cOM4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cOM5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cOM6ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cOM7ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cOM8ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cOM9ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cOM10ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripComPorts = new System.Windows.Forms.ToolStripComboBox();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.WaveformWindow = new System.Windows.Forms.TabControl();
             this.ControlWindow = new System.Windows.Forms.TabPage();
@@ -112,6 +103,7 @@
             this.TextWindow = new System.Windows.Forms.TabPage();
             this.WaveformProcessing = new System.Windows.Forms.TabPage();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.WaveformWindow.SuspendLayout();
             this.ControlWindow.SuspendLayout();
@@ -155,16 +147,7 @@
             // 
             this.portConnectToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.autoConnectToolStripMenuItem,
-            this.cOM1ToolStripMenuItem,
-            this.cOM2ToolStripMenuItem,
-            this.cOM3ToolStripMenuItem,
-            this.cOM4ToolStripMenuItem,
-            this.cOM5ToolStripMenuItem,
-            this.cOM6ToolStripMenuItem,
-            this.cOM7ToolStripMenuItem,
-            this.cOM8ToolStripMenuItem,
-            this.cOM9ToolStripMenuItem,
-            this.cOM10ToolStripMenuItem});
+            this.toolStripComPorts});
             this.portConnectToolStripMenuItem.Name = "portConnectToolStripMenuItem";
             this.portConnectToolStripMenuItem.Size = new System.Drawing.Size(119, 27);
             this.portConnectToolStripMenuItem.Text = "PortConnect";
@@ -173,79 +156,16 @@
             // autoConnectToolStripMenuItem
             // 
             this.autoConnectToolStripMenuItem.Name = "autoConnectToolStripMenuItem";
-            this.autoConnectToolStripMenuItem.Size = new System.Drawing.Size(200, 28);
+            this.autoConnectToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
             this.autoConnectToolStripMenuItem.Text = "Auto Connect";
             this.autoConnectToolStripMenuItem.Click += new System.EventHandler(this.autoConnectToolStripMenuItem_Click);
             // 
-            // cOM1ToolStripMenuItem
+            // toolStripComPorts
             // 
-            this.cOM1ToolStripMenuItem.Name = "cOM1ToolStripMenuItem";
-            this.cOM1ToolStripMenuItem.Size = new System.Drawing.Size(200, 28);
-            this.cOM1ToolStripMenuItem.Text = "COM1";
-            this.cOM1ToolStripMenuItem.Click += new System.EventHandler(this.cOM1ToolStripMenuItem_Click_1);
-            // 
-            // cOM2ToolStripMenuItem
-            // 
-            this.cOM2ToolStripMenuItem.Name = "cOM2ToolStripMenuItem";
-            this.cOM2ToolStripMenuItem.Size = new System.Drawing.Size(200, 28);
-            this.cOM2ToolStripMenuItem.Text = "COM2";
-            this.cOM2ToolStripMenuItem.Click += new System.EventHandler(this.cOM2ToolStripMenuItem_Click);
-            // 
-            // cOM3ToolStripMenuItem
-            // 
-            this.cOM3ToolStripMenuItem.Name = "cOM3ToolStripMenuItem";
-            this.cOM3ToolStripMenuItem.Size = new System.Drawing.Size(200, 28);
-            this.cOM3ToolStripMenuItem.Text = "COM3";
-            this.cOM3ToolStripMenuItem.Click += new System.EventHandler(this.cOM3ToolStripMenuItem_Click);
-            // 
-            // cOM4ToolStripMenuItem
-            // 
-            this.cOM4ToolStripMenuItem.Name = "cOM4ToolStripMenuItem";
-            this.cOM4ToolStripMenuItem.Size = new System.Drawing.Size(200, 28);
-            this.cOM4ToolStripMenuItem.Text = "COM4";
-            this.cOM4ToolStripMenuItem.Click += new System.EventHandler(this.cOM4ToolStripMenuItem_Click);
-            // 
-            // cOM5ToolStripMenuItem
-            // 
-            this.cOM5ToolStripMenuItem.Name = "cOM5ToolStripMenuItem";
-            this.cOM5ToolStripMenuItem.Size = new System.Drawing.Size(200, 28);
-            this.cOM5ToolStripMenuItem.Text = "COM5";
-            this.cOM5ToolStripMenuItem.Click += new System.EventHandler(this.cOM5ToolStripMenuItem_Click);
-            // 
-            // cOM6ToolStripMenuItem
-            // 
-            this.cOM6ToolStripMenuItem.Name = "cOM6ToolStripMenuItem";
-            this.cOM6ToolStripMenuItem.Size = new System.Drawing.Size(200, 28);
-            this.cOM6ToolStripMenuItem.Text = "COM6";
-            this.cOM6ToolStripMenuItem.Click += new System.EventHandler(this.cOM6ToolStripMenuItem_Click);
-            // 
-            // cOM7ToolStripMenuItem
-            // 
-            this.cOM7ToolStripMenuItem.Name = "cOM7ToolStripMenuItem";
-            this.cOM7ToolStripMenuItem.Size = new System.Drawing.Size(200, 28);
-            this.cOM7ToolStripMenuItem.Text = "COM7";
-            this.cOM7ToolStripMenuItem.Click += new System.EventHandler(this.cOM7ToolStripMenuItem_Click);
-            // 
-            // cOM8ToolStripMenuItem
-            // 
-            this.cOM8ToolStripMenuItem.Name = "cOM8ToolStripMenuItem";
-            this.cOM8ToolStripMenuItem.Size = new System.Drawing.Size(200, 28);
-            this.cOM8ToolStripMenuItem.Text = "COM8";
-            this.cOM8ToolStripMenuItem.Click += new System.EventHandler(this.cOM8ToolStripMenuItem_Click);
-            // 
-            // cOM9ToolStripMenuItem
-            // 
-            this.cOM9ToolStripMenuItem.Name = "cOM9ToolStripMenuItem";
-            this.cOM9ToolStripMenuItem.Size = new System.Drawing.Size(200, 28);
-            this.cOM9ToolStripMenuItem.Text = "COM9";
-            this.cOM9ToolStripMenuItem.Click += new System.EventHandler(this.cOM9ToolStripMenuItem_Click);
-            // 
-            // cOM10ToolStripMenuItem
-            // 
-            this.cOM10ToolStripMenuItem.Name = "cOM10ToolStripMenuItem";
-            this.cOM10ToolStripMenuItem.Size = new System.Drawing.Size(200, 28);
-            this.cOM10ToolStripMenuItem.Text = "COM10";
-            this.cOM10ToolStripMenuItem.Click += new System.EventHandler(this.cOM10ToolStripMenuItem_Click);
+            this.toolStripComPorts.Name = "toolStripComPorts";
+            this.toolStripComPorts.Size = new System.Drawing.Size(121, 31);
+            this.toolStripComPorts.Text = "Select port";
+            this.toolStripComPorts.SelectedIndexChanged += new System.EventHandler(this.toolStripComPorts_SelectedIndexChanged);
             // 
             // helpToolStripMenuItem
             // 
@@ -375,8 +295,8 @@
             this.splitContainer1.Panel2.Controls.Add(this.auxWaveForm);
             this.splitContainer1.Panel2.Controls.Add(this.auxOnOff);
             this.splitContainer1.Panel2.Controls.Add(this.label10);
-            this.splitContainer1.Panel2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.splitContainer1.Panel2.Margin = new System.Windows.Forms.Padding(6);
+            this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(6);
             this.splitContainer1.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.splitContainer1.Size = new System.Drawing.Size(1541, 402);
             this.splitContainer1.SplitterDistance = 762;
@@ -1274,12 +1194,21 @@
             this.timer1.Interval = 500;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(637, 0);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(8, 31);
+            this.comboBox1.TabIndex = 2;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkBlue;
             this.ClientSize = new System.Drawing.Size(1589, 900);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.WaveformWindow);
             this.Controls.Add(this.menuStrip1);
             this.HelpButton = true;
@@ -1372,16 +1301,6 @@
         private CheckBox checkBox3;
         private CheckBox checkBox2;
         private ToolStripMenuItem autoConnectToolStripMenuItem;
-        private ToolStripMenuItem cOM1ToolStripMenuItem;
-        private ToolStripMenuItem cOM2ToolStripMenuItem;
-        private ToolStripMenuItem cOM3ToolStripMenuItem;
-        private ToolStripMenuItem cOM4ToolStripMenuItem;
-        private ToolStripMenuItem cOM5ToolStripMenuItem;
-        private ToolStripMenuItem cOM6ToolStripMenuItem;
-        private ToolStripMenuItem cOM7ToolStripMenuItem;
-        private ToolStripMenuItem cOM8ToolStripMenuItem;
-        private ToolStripMenuItem cOM9ToolStripMenuItem;
-        private ToolStripMenuItem cOM10ToolStripMenuItem;
         public TextBox model;
         public TextBox comport;
         private System.Windows.Forms.Timer timer1;
@@ -1391,5 +1310,7 @@
         private ComboBox mainAmplitudeUnit;
         private ComboBox auxOffsetUnit;
         private ComboBox auxAmplitudeUnit;
+        private ComboBox comboBox1;
+        private ToolStripComboBox toolStripComPorts;
     }
 }

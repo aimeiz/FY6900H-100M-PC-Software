@@ -2,6 +2,7 @@
 using static System.Net.Mime.MediaTypeNames;
 using System.Threading;
 using System.Drawing.Text;
+using System.IO.Ports;
 
 namespace FY6900H_100M_PC_Software
 {
@@ -10,6 +11,9 @@ namespace FY6900H_100M_PC_Software
         public Form1()
         {
             InitializeComponent();
+            string[] ports = SerialPort.GetPortNames();
+            Array.Sort(ports);
+            toolStripComPorts.Items.AddRange(ports);
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
@@ -64,16 +68,29 @@ namespace FY6900H_100M_PC_Software
         {
 
         }
+        //private void comPortSelected()
+        //{
+        //    verifyPort(toolStripComPorts.SelectedItem.ToString());
+        //}
 
-        private void cOM2ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            verifyPort("COM2");
-        }
+        //private void comport_TextChanged(object sender, EventArgs e)
+        //{
 
-        private void cOM3ToolStripMenuItem_Click(object sender, EventArgs e)
+        //}
+
+        private void toolStripComPorts_SelectedIndexChanged(object sender, EventArgs e)
         {
-            verifyPort("COM3");
+            verifyPort(toolStripComPorts.SelectedItem.ToString());
         }
+        //private void cOM2ToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    verifyPort("COM2");
+        //}
+
+        //private void cOM3ToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    verifyPort("COM3");
+        //}
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -127,46 +144,46 @@ namespace FY6900H_100M_PC_Software
             }
         }
 
-        private void cOM1ToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            verifyPort("COM1");
-        }
+        //private void cOM1ToolStripMenuItem_Click_1(object sender, EventArgs e)
+        //{
+        //    verifyPort("COM1");
+        //}
 
-        private void cOM4ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            verifyPort("COM4");
+        //private void cOM4ToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    verifyPort("COM4");
 
-        }
+        //}
 
-        private void cOM5ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            verifyPort("COM5");
-        }
+        //private void cOM5ToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    verifyPort("COM5");
+        //}
 
-        private void cOM6ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            verifyPort("COM6");
-        }
+        //private void cOM6ToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    verifyPort("COM6");
+        //}
 
-        private void cOM7ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            verifyPort("COM7");
-        }
+        //private void cOM7ToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    verifyPort("COM7");
+        //}
 
-        private void cOM8ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            verifyPort("COM8");
-        }
+        //private void cOM8ToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    verifyPort("COM8");
+        //}
 
-        private void cOM9ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            verifyPort("COM9");
-        }
+        //private void cOM9ToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    verifyPort("COM9");
+        //}
 
-        private void cOM10ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            verifyPort("COM10");
-        }
+        //private void cOM10ToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    verifyPort("COM10");
+        //}
 
         private void textChangeDelay()
         {
@@ -417,11 +434,6 @@ namespace FY6900H_100M_PC_Software
                 sendCommand("WFD" + duty);
                 auxDutyChangeToSend = false;
             }
-        }
-
-        private void comport_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 
