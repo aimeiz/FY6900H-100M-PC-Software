@@ -1,4 +1,5 @@
-﻿namespace FY6900H_100M_PC_Software
+﻿using System.Globalization;
+namespace FY6900H_100M_PC_Software
 {
     partial class Form1
     {
@@ -127,20 +128,20 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(6, 3, 0, 3);
-            this.menuStrip1.Size = new System.Drawing.Size(1589, 33);
+            this.menuStrip1.Size = new System.Drawing.Size(1413, 29);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(49, 27);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(41, 23);
             this.toolStripMenuItem1.Text = "File";
             // 
             // waveformProcessingToolStripMenuItem
             // 
             this.waveformProcessingToolStripMenuItem.Name = "waveformProcessingToolStripMenuItem";
-            this.waveformProcessingToolStripMenuItem.Size = new System.Drawing.Size(187, 27);
+            this.waveformProcessingToolStripMenuItem.Size = new System.Drawing.Size(152, 23);
             this.waveformProcessingToolStripMenuItem.Text = "Waveform Processing";
             // 
             // portConnectToolStripMenuItem
@@ -149,28 +150,28 @@
             this.autoConnectToolStripMenuItem,
             this.toolStripComPorts});
             this.portConnectToolStripMenuItem.Name = "portConnectToolStripMenuItem";
-            this.portConnectToolStripMenuItem.Size = new System.Drawing.Size(119, 27);
+            this.portConnectToolStripMenuItem.Size = new System.Drawing.Size(97, 23);
             this.portConnectToolStripMenuItem.Text = "PortConnect";
             this.portConnectToolStripMenuItem.Click += new System.EventHandler(this.portConnectToolStripMenuItem_Click);
             // 
             // autoConnectToolStripMenuItem
             // 
             this.autoConnectToolStripMenuItem.Name = "autoConnectToolStripMenuItem";
-            this.autoConnectToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
+            this.autoConnectToolStripMenuItem.Size = new System.Drawing.Size(181, 24);
             this.autoConnectToolStripMenuItem.Text = "Auto Connect";
             this.autoConnectToolStripMenuItem.Click += new System.EventHandler(this.autoConnectToolStripMenuItem_Click);
             // 
             // toolStripComPorts
             // 
             this.toolStripComPorts.Name = "toolStripComPorts";
-            this.toolStripComPorts.Size = new System.Drawing.Size(121, 31);
+            this.toolStripComPorts.Size = new System.Drawing.Size(121, 27);
             this.toolStripComPorts.Text = "Select port";
             this.toolStripComPorts.SelectedIndexChanged += new System.EventHandler(this.toolStripComPorts_SelectedIndexChanged);
             // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(59, 27);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(49, 23);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // WaveformWindow
@@ -179,11 +180,10 @@
             this.WaveformWindow.Controls.Add(this.TextWindow);
             this.WaveformWindow.Controls.Add(this.WaveformProcessing);
             this.WaveformWindow.ItemSize = new System.Drawing.Size(124, 25);
-            this.WaveformWindow.Location = new System.Drawing.Point(3, 34);
-            this.WaveformWindow.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.WaveformWindow.Location = new System.Drawing.Point(2, 28);
             this.WaveformWindow.Name = "WaveformWindow";
             this.WaveformWindow.SelectedIndex = 0;
-            this.WaveformWindow.Size = new System.Drawing.Size(1575, 862);
+            this.WaveformWindow.Size = new System.Drawing.Size(1400, 712);
             this.WaveformWindow.TabIndex = 1;
             // 
             // ControlWindow
@@ -191,11 +191,10 @@
             this.ControlWindow.BackColor = System.Drawing.Color.Transparent;
             this.ControlWindow.Controls.Add(this.tableLayoutPanel1);
             this.ControlWindow.Location = new System.Drawing.Point(4, 29);
-            this.ControlWindow.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ControlWindow.Name = "ControlWindow";
-            this.ControlWindow.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.ControlWindow.Padding = new System.Windows.Forms.Padding(3);
             this.ControlWindow.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.ControlWindow.Size = new System.Drawing.Size(1567, 829);
+            this.ControlWindow.Size = new System.Drawing.Size(1392, 679);
             this.ControlWindow.TabIndex = 2;
             this.ControlWindow.Text = "                                           Control Window                        " +
     "                   ";
@@ -210,24 +209,22 @@
             this.tableLayoutPanel1.Controls.Add(this.splitContainer1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.comport, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.model, 0, 3);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 6);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(3);
             this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 311F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 43F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1563, 817);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 257F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 19F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1380, 675);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(11, 9);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.splitContainer1.Location = new System.Drawing.Point(9, 9);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -295,11 +292,11 @@
             this.splitContainer1.Panel2.Controls.Add(this.auxWaveForm);
             this.splitContainer1.Panel2.Controls.Add(this.auxOnOff);
             this.splitContainer1.Panel2.Controls.Add(this.label10);
-            this.splitContainer1.Panel2.Margin = new System.Windows.Forms.Padding(6);
-            this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(6);
+            this.splitContainer1.Panel2.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.splitContainer1.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.splitContainer1.Size = new System.Drawing.Size(1541, 402);
-            this.splitContainer1.SplitterDistance = 762;
+            this.splitContainer1.Size = new System.Drawing.Size(1362, 328);
+            this.splitContainer1.SplitterDistance = 672;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -310,10 +307,9 @@
             this.mainOffsetUnit.Items.AddRange(new object[] {
             "V",
             "mV"});
-            this.mainOffsetUnit.Location = new System.Drawing.Point(390, 301);
-            this.mainOffsetUnit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.mainOffsetUnit.Location = new System.Drawing.Point(346, 248);
             this.mainOffsetUnit.Name = "mainOffsetUnit";
-            this.mainOffsetUnit.Size = new System.Drawing.Size(91, 39);
+            this.mainOffsetUnit.Size = new System.Drawing.Size(82, 33);
             this.mainOffsetUnit.TabIndex = 121;
             this.mainOffsetUnit.Text = "V";
             this.mainOffsetUnit.SelectedIndexChanged += new System.EventHandler(this.mainOffsetUnit_SelectedIndexChanged);
@@ -327,10 +323,9 @@
             "mV",
             "dBV",
             "dBm"});
-            this.mainAmplitudeUnit.Location = new System.Drawing.Point(390, 204);
-            this.mainAmplitudeUnit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.mainAmplitudeUnit.Location = new System.Drawing.Point(346, 168);
             this.mainAmplitudeUnit.Name = "mainAmplitudeUnit";
-            this.mainAmplitudeUnit.Size = new System.Drawing.Size(91, 39);
+            this.mainAmplitudeUnit.Size = new System.Drawing.Size(82, 33);
             this.mainAmplitudeUnit.TabIndex = 120;
             this.mainAmplitudeUnit.Text = "V";
             this.mainAmplitudeUnit.SelectedIndexChanged += new System.EventHandler(this.mainAmplitudeUnit_SelectedIndexChanged);
@@ -343,10 +338,9 @@
             "Hz",
             "KHz",
             "MHz"});
-            this.mainFreqUnit.Location = new System.Drawing.Point(390, 112);
-            this.mainFreqUnit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.mainFreqUnit.Location = new System.Drawing.Point(346, 92);
             this.mainFreqUnit.Name = "mainFreqUnit";
-            this.mainFreqUnit.Size = new System.Drawing.Size(91, 39);
+            this.mainFreqUnit.Size = new System.Drawing.Size(82, 33);
             this.mainFreqUnit.TabIndex = 119;
             this.mainFreqUnit.Text = "Hz";
             this.mainFreqUnit.SelectedIndexChanged += new System.EventHandler(this.mainFreqUnit_SelectedIndexChanged);
@@ -354,30 +348,27 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(490, 274);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(435, 227);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(46, 23);
+            this.label3.Size = new System.Drawing.Size(39, 19);
             this.label3.TabIndex = 118;
             this.label3.Text = "Duty";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(489, 147);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(434, 122);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 23);
+            this.label2.Size = new System.Drawing.Size(45, 19);
             this.label2.TabIndex = 117;
             this.label2.Text = "Phase";
             // 
             // Set
             // 
             this.Set.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.Set.Location = new System.Drawing.Point(666, 301);
-            this.Set.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.Set.Location = new System.Drawing.Point(592, 248);
             this.Set.Name = "Set";
-            this.Set.Size = new System.Drawing.Size(59, 60);
+            this.Set.Size = new System.Drawing.Size(53, 49);
             this.Set.TabIndex = 116;
             this.Set.Text = "Set";
             this.Set.UseVisualStyleBackColor = true;
@@ -385,28 +376,26 @@
             // textBox3
             // 
             this.textBox3.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox3.Location = new System.Drawing.Point(624, 301);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.textBox3.Location = new System.Drawing.Point(554, 248);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(35, 39);
+            this.textBox3.Size = new System.Drawing.Size(31, 32);
             this.textBox3.TabIndex = 115;
             this.textBox3.Text = " %";
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // hScrollBar6
             // 
-            this.hScrollBar6.Location = new System.Drawing.Point(490, 350);
+            this.hScrollBar6.Location = new System.Drawing.Point(435, 289);
             this.hScrollBar6.Name = "hScrollBar6";
-            this.hScrollBar6.Size = new System.Drawing.Size(170, 13);
+            this.hScrollBar6.Size = new System.Drawing.Size(151, 13);
             this.hScrollBar6.TabIndex = 114;
             // 
             // mainDuty
             // 
             this.mainDuty.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.mainDuty.Location = new System.Drawing.Point(490, 301);
-            this.mainDuty.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.mainDuty.Location = new System.Drawing.Point(435, 248);
             this.mainDuty.Name = "mainDuty";
-            this.mainDuty.Size = new System.Drawing.Size(126, 39);
+            this.mainDuty.Size = new System.Drawing.Size(113, 32);
             this.mainDuty.TabIndex = 113;
             this.mainDuty.Text = "50";
             this.mainDuty.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -415,28 +404,26 @@
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox2.Location = new System.Drawing.Point(665, 178);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.textBox2.Location = new System.Drawing.Point(591, 147);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(57, 39);
+            this.textBox2.Size = new System.Drawing.Size(51, 32);
             this.textBox2.TabIndex = 112;
             this.textBox2.Text = " Deg";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // hScrollBar5
             // 
-            this.hScrollBar5.Location = new System.Drawing.Point(490, 227);
+            this.hScrollBar5.Location = new System.Drawing.Point(435, 187);
             this.hScrollBar5.Name = "hScrollBar5";
-            this.hScrollBar5.Size = new System.Drawing.Size(233, 13);
+            this.hScrollBar5.Size = new System.Drawing.Size(207, 13);
             this.hScrollBar5.TabIndex = 111;
             // 
             // mainPhase
             // 
             this.mainPhase.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.mainPhase.Location = new System.Drawing.Point(490, 178);
-            this.mainPhase.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.mainPhase.Location = new System.Drawing.Point(435, 147);
             this.mainPhase.Name = "mainPhase";
-            this.mainPhase.Size = new System.Drawing.Size(169, 39);
+            this.mainPhase.Size = new System.Drawing.Size(150, 32);
             this.mainPhase.TabIndex = 110;
             this.mainPhase.Text = " 0";
             this.mainPhase.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -445,96 +432,89 @@
             // mainWavePicture
             // 
             this.mainWavePicture.BackColor = System.Drawing.Color.White;
-            this.mainWavePicture.Location = new System.Drawing.Point(490, 34);
-            this.mainWavePicture.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.mainWavePicture.Location = new System.Drawing.Point(435, 28);
             this.mainWavePicture.Name = "mainWavePicture";
-            this.mainWavePicture.Size = new System.Drawing.Size(233, 103);
+            this.mainWavePicture.Size = new System.Drawing.Size(207, 85);
             this.mainWavePicture.TabIndex = 109;
             this.mainWavePicture.TabStop = false;
             // 
             // hScrollBar4
             // 
-            this.hScrollBar4.Location = new System.Drawing.Point(131, 350);
+            this.hScrollBar4.Location = new System.Drawing.Point(117, 289);
             this.hScrollBar4.Name = "hScrollBar4";
-            this.hScrollBar4.Size = new System.Drawing.Size(351, 13);
+            this.hScrollBar4.Size = new System.Drawing.Size(312, 13);
             this.hScrollBar4.TabIndex = 108;
             // 
             // Offset
             // 
             this.Offset.AutoSize = true;
             this.Offset.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.Offset.Location = new System.Drawing.Point(35, 310);
-            this.Offset.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Offset.Location = new System.Drawing.Point(31, 256);
             this.Offset.Name = "Offset";
-            this.Offset.Size = new System.Drawing.Size(78, 28);
+            this.Offset.Size = new System.Drawing.Size(63, 21);
             this.Offset.TabIndex = 107;
             this.Offset.Text = "OFFSET";
             // 
             // mainOffset
             // 
             this.mainOffset.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.mainOffset.Location = new System.Drawing.Point(131, 301);
-            this.mainOffset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.mainOffset.Location = new System.Drawing.Point(117, 248);
             this.mainOffset.Name = "mainOffset";
-            this.mainOffset.Size = new System.Drawing.Size(251, 39);
+            this.mainOffset.Size = new System.Drawing.Size(223, 32);
             this.mainOffset.TabIndex = 106;
             this.mainOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.mainOffset.TextChanged += new System.EventHandler(this.mainOffset_TextChanged);
             // 
             // hScrollBar3
             // 
-            this.hScrollBar3.Location = new System.Drawing.Point(131, 251);
+            this.hScrollBar3.Location = new System.Drawing.Point(117, 208);
             this.hScrollBar3.Name = "hScrollBar3";
-            this.hScrollBar3.Size = new System.Drawing.Size(351, 13);
+            this.hScrollBar3.Size = new System.Drawing.Size(312, 13);
             this.hScrollBar3.TabIndex = 105;
             // 
             // Ampl
             // 
             this.Ampl.AutoSize = true;
             this.Ampl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.Ampl.Location = new System.Drawing.Point(51, 212);
-            this.Ampl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Ampl.Location = new System.Drawing.Point(46, 175);
             this.Ampl.Name = "Ampl";
-            this.Ampl.Size = new System.Drawing.Size(63, 28);
+            this.Ampl.Size = new System.Drawing.Size(51, 21);
             this.Ampl.TabIndex = 104;
             this.Ampl.Text = "AMPL";
             // 
             // mainAmplitude
             // 
             this.mainAmplitude.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.mainAmplitude.Location = new System.Drawing.Point(131, 204);
-            this.mainAmplitude.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.mainAmplitude.Location = new System.Drawing.Point(117, 168);
             this.mainAmplitude.Name = "mainAmplitude";
-            this.mainAmplitude.Size = new System.Drawing.Size(251, 39);
+            this.mainAmplitude.Size = new System.Drawing.Size(223, 32);
             this.mainAmplitude.TabIndex = 103;
             this.mainAmplitude.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.mainAmplitude.TextChanged += new System.EventHandler(this.mainAmplitude_TextChanged);
             // 
             // hScrollBar2
             // 
-            this.hScrollBar2.Location = new System.Drawing.Point(131, 163);
+            this.hScrollBar2.Location = new System.Drawing.Point(117, 134);
             this.hScrollBar2.Name = "hScrollBar2";
-            this.hScrollBar2.Size = new System.Drawing.Size(351, 13);
+            this.hScrollBar2.Size = new System.Drawing.Size(312, 13);
             this.hScrollBar2.TabIndex = 102;
             // 
             // FREQ
             // 
             this.FREQ.AutoSize = true;
             this.FREQ.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.FREQ.Location = new System.Drawing.Point(58, 112);
-            this.FREQ.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.FREQ.Location = new System.Drawing.Point(51, 92);
             this.FREQ.Name = "FREQ";
-            this.FREQ.Size = new System.Drawing.Size(59, 28);
+            this.FREQ.Size = new System.Drawing.Size(48, 21);
             this.FREQ.TabIndex = 101;
             this.FREQ.Text = "FREQ";
             // 
             // mainFrequency
             // 
             this.mainFrequency.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.mainFrequency.Location = new System.Drawing.Point(131, 112);
-            this.mainFrequency.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.mainFrequency.Location = new System.Drawing.Point(117, 92);
             this.mainFrequency.Name = "mainFrequency";
-            this.mainFrequency.Size = new System.Drawing.Size(251, 39);
+            this.mainFrequency.Size = new System.Drawing.Size(223, 32);
             this.mainFrequency.TabIndex = 100;
             this.mainFrequency.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.mainFrequency.TextChanged += new System.EventHandler(this.mainFrequency_TextChanged);
@@ -543,18 +523,17 @@
             // 
             this.WAVE.AutoSize = true;
             this.WAVE.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.WAVE.Location = new System.Drawing.Point(51, 41);
-            this.WAVE.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.WAVE.Location = new System.Drawing.Point(46, 34);
             this.WAVE.Name = "WAVE";
-            this.WAVE.Size = new System.Drawing.Size(64, 28);
+            this.WAVE.Size = new System.Drawing.Size(51, 21);
             this.WAVE.TabIndex = 99;
             this.WAVE.Text = "WAVE";
             // 
             // hScrollBar1
             // 
-            this.hScrollBar1.Location = new System.Drawing.Point(131, 72);
+            this.hScrollBar1.Location = new System.Drawing.Point(117, 60);
             this.hScrollBar1.Name = "hScrollBar1";
-            this.hScrollBar1.Size = new System.Drawing.Size(352, 13);
+            this.hScrollBar1.Size = new System.Drawing.Size(313, 13);
             this.hScrollBar1.TabIndex = 98;
             // 
             // mainWaveForm
@@ -663,11 +642,10 @@
             "ARB62",
             "ARB63",
             "ARB64"});
-            this.mainWaveForm.Location = new System.Drawing.Point(247, 34);
-            this.mainWaveForm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.mainWaveForm.Location = new System.Drawing.Point(219, 28);
             this.mainWaveForm.Name = "mainWaveForm";
             this.mainWaveForm.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.mainWaveForm.Size = new System.Drawing.Size(235, 31);
+            this.mainWaveForm.Size = new System.Drawing.Size(210, 25);
             this.mainWaveForm.TabIndex = 97;
             this.mainWaveForm.SelectedIndexChanged += new System.EventHandler(this.mainWaveForm_SelectedIndexChanged);
             this.mainWaveForm.Click += new System.EventHandler(this.mainWaveForm_Click);
@@ -675,10 +653,9 @@
             // mainOnOff
             // 
             this.mainOnOff.BackColor = System.Drawing.Color.Transparent;
-            this.mainOnOff.Location = new System.Drawing.Point(131, 32);
-            this.mainOnOff.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.mainOnOff.Location = new System.Drawing.Point(117, 27);
             this.mainOnOff.Name = "mainOnOff";
-            this.mainOnOff.Size = new System.Drawing.Size(109, 34);
+            this.mainOnOff.Size = new System.Drawing.Size(97, 28);
             this.mainOnOff.TabIndex = 1;
             this.mainOnOff.Text = "CH1 On/Off";
             this.mainOnOff.UseVisualStyleBackColor = false;
@@ -689,9 +666,8 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(5, 3);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(51, 28);
+            this.label1.Size = new System.Drawing.Size(41, 21);
             this.label1.TabIndex = 0;
             this.label1.Text = "CH1";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -703,10 +679,9 @@
             this.auxOffsetUnit.Items.AddRange(new object[] {
             "V",
             "mV"});
-            this.auxOffsetUnit.Location = new System.Drawing.Point(409, 307);
-            this.auxOffsetUnit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.auxOffsetUnit.Location = new System.Drawing.Point(347, 247);
             this.auxOffsetUnit.Name = "auxOffsetUnit";
-            this.auxOffsetUnit.Size = new System.Drawing.Size(91, 39);
+            this.auxOffsetUnit.Size = new System.Drawing.Size(82, 33);
             this.auxOffsetUnit.TabIndex = 147;
             this.auxOffsetUnit.Text = "V";
             this.auxOffsetUnit.SelectedIndexChanged += new System.EventHandler(this.auxOffsetUnit_SelectedIndexChanged);
@@ -720,10 +695,9 @@
             "mV",
             "dBV",
             "dBm"});
-            this.auxAmplitudeUnit.Location = new System.Drawing.Point(409, 209);
-            this.auxAmplitudeUnit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.auxAmplitudeUnit.Location = new System.Drawing.Point(343, 164);
             this.auxAmplitudeUnit.Name = "auxAmplitudeUnit";
-            this.auxAmplitudeUnit.Size = new System.Drawing.Size(91, 39);
+            this.auxAmplitudeUnit.Size = new System.Drawing.Size(82, 33);
             this.auxAmplitudeUnit.TabIndex = 146;
             this.auxAmplitudeUnit.Text = "V";
             this.auxAmplitudeUnit.SelectedIndexChanged += new System.EventHandler(this.auxAmplitudeUnit_SelectedIndexChanged);
@@ -736,10 +710,9 @@
             "Hz",
             "KHz",
             "MHz"});
-            this.auxFreqUnit.Location = new System.Drawing.Point(409, 120);
-            this.auxFreqUnit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.auxFreqUnit.Location = new System.Drawing.Point(347, 99);
             this.auxFreqUnit.Name = "auxFreqUnit";
-            this.auxFreqUnit.Size = new System.Drawing.Size(91, 39);
+            this.auxFreqUnit.Size = new System.Drawing.Size(82, 33);
             this.auxFreqUnit.TabIndex = 120;
             this.auxFreqUnit.Text = "Hz";
             this.auxFreqUnit.SelectedIndexChanged += new System.EventHandler(this.auxFrequencyUnit_SelectedIndexChanged);
@@ -751,10 +724,9 @@
             this.checkBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.checkBox4.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
             this.checkBox4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.checkBox4.Location = new System.Drawing.Point(10, 327);
-            this.checkBox4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.checkBox4.Location = new System.Drawing.Point(9, 260);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(18, 17);
+            this.checkBox4.Size = new System.Drawing.Size(15, 14);
             this.checkBox4.TabIndex = 145;
             this.checkBox4.UseVisualStyleBackColor = false;
             // 
@@ -765,10 +737,9 @@
             this.checkBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.checkBox3.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
             this.checkBox3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.checkBox3.Location = new System.Drawing.Point(10, 227);
-            this.checkBox3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.checkBox3.Location = new System.Drawing.Point(9, 175);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(18, 17);
+            this.checkBox3.Size = new System.Drawing.Size(15, 14);
             this.checkBox3.TabIndex = 144;
             this.checkBox3.UseVisualStyleBackColor = false;
             // 
@@ -779,20 +750,18 @@
             this.checkBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.checkBox2.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
             this.checkBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.checkBox2.Location = new System.Drawing.Point(10, 129);
-            this.checkBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.checkBox2.Location = new System.Drawing.Point(9, 106);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(18, 17);
+            this.checkBox2.Size = new System.Drawing.Size(15, 14);
             this.checkBox2.TabIndex = 143;
             this.checkBox2.UseVisualStyleBackColor = false;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(509, 282);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(453, 227);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(46, 23);
+            this.label4.Size = new System.Drawing.Size(39, 19);
             this.label4.TabIndex = 142;
             this.label4.Text = "Duty";
             // 
@@ -803,30 +772,27 @@
             this.checkBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.checkBox1.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
             this.checkBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.checkBox1.Location = new System.Drawing.Point(10, 58);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.checkBox1.Location = new System.Drawing.Point(9, 48);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(18, 17);
+            this.checkBox1.Size = new System.Drawing.Size(15, 14);
             this.checkBox1.TabIndex = 1;
             this.checkBox1.UseVisualStyleBackColor = false;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(508, 155);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(451, 128);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(55, 23);
+            this.label5.Size = new System.Drawing.Size(45, 19);
             this.label5.TabIndex = 141;
             this.label5.Text = "Phase";
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(685, 310);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.button1.Location = new System.Drawing.Point(591, 246);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(59, 60);
+            this.button1.Size = new System.Drawing.Size(53, 49);
             this.button1.TabIndex = 140;
             this.button1.Text = "Set";
             this.button1.UseVisualStyleBackColor = true;
@@ -834,28 +800,26 @@
             // textBox5
             // 
             this.textBox5.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox5.Location = new System.Drawing.Point(643, 310);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.textBox5.Location = new System.Drawing.Point(554, 247);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(35, 39);
+            this.textBox5.Size = new System.Drawing.Size(31, 32);
             this.textBox5.TabIndex = 139;
             this.textBox5.Text = " %";
             this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // hScrollBar7
             // 
-            this.hScrollBar7.Location = new System.Drawing.Point(509, 354);
+            this.hScrollBar7.Location = new System.Drawing.Point(435, 282);
             this.hScrollBar7.Name = "hScrollBar7";
-            this.hScrollBar7.Size = new System.Drawing.Size(170, 13);
+            this.hScrollBar7.Size = new System.Drawing.Size(151, 13);
             this.hScrollBar7.TabIndex = 138;
             // 
             // auxDuty
             // 
             this.auxDuty.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.auxDuty.Location = new System.Drawing.Point(509, 310);
-            this.auxDuty.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.auxDuty.Location = new System.Drawing.Point(435, 247);
             this.auxDuty.Name = "auxDuty";
-            this.auxDuty.Size = new System.Drawing.Size(126, 39);
+            this.auxDuty.Size = new System.Drawing.Size(113, 32);
             this.auxDuty.TabIndex = 137;
             this.auxDuty.Text = "50";
             this.auxDuty.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -864,28 +828,26 @@
             // textBox7
             // 
             this.textBox7.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox7.Location = new System.Drawing.Point(684, 187);
-            this.textBox7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.textBox7.Location = new System.Drawing.Point(591, 164);
             this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(57, 39);
+            this.textBox7.Size = new System.Drawing.Size(51, 32);
             this.textBox7.TabIndex = 136;
             this.textBox7.Text = " Deg";
             this.textBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // hScrollBar8
             // 
-            this.hScrollBar8.Location = new System.Drawing.Point(509, 235);
+            this.hScrollBar8.Location = new System.Drawing.Point(435, 200);
             this.hScrollBar8.Name = "hScrollBar8";
-            this.hScrollBar8.Size = new System.Drawing.Size(233, 13);
+            this.hScrollBar8.Size = new System.Drawing.Size(207, 13);
             this.hScrollBar8.TabIndex = 135;
             // 
             // auxPhase
             // 
             this.auxPhase.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.auxPhase.Location = new System.Drawing.Point(509, 187);
-            this.auxPhase.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.auxPhase.Location = new System.Drawing.Point(435, 164);
             this.auxPhase.Name = "auxPhase";
-            this.auxPhase.Size = new System.Drawing.Size(169, 39);
+            this.auxPhase.Size = new System.Drawing.Size(150, 32);
             this.auxPhase.TabIndex = 134;
             this.auxPhase.Text = " 0";
             this.auxPhase.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -894,96 +856,89 @@
             // auxWavePicture
             // 
             this.auxWavePicture.BackColor = System.Drawing.Color.White;
-            this.auxWavePicture.Location = new System.Drawing.Point(509, 41);
-            this.auxWavePicture.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.auxWavePicture.Location = new System.Drawing.Point(435, 37);
             this.auxWavePicture.Name = "auxWavePicture";
-            this.auxWavePicture.Size = new System.Drawing.Size(233, 103);
+            this.auxWavePicture.Size = new System.Drawing.Size(207, 85);
             this.auxWavePicture.TabIndex = 133;
             this.auxWavePicture.TabStop = false;
             // 
             // hScrollBar9
             // 
-            this.hScrollBar9.Location = new System.Drawing.Point(135, 356);
+            this.hScrollBar9.Location = new System.Drawing.Point(103, 284);
             this.hScrollBar9.Name = "hScrollBar9";
-            this.hScrollBar9.Size = new System.Drawing.Size(366, 13);
+            this.hScrollBar9.Size = new System.Drawing.Size(326, 13);
             this.hScrollBar9.TabIndex = 132;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(39, 322);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Location = new System.Drawing.Point(33, 257);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(78, 28);
+            this.label6.Size = new System.Drawing.Size(63, 21);
             this.label6.TabIndex = 131;
             this.label6.Text = "OFFSET";
             // 
             // auxOffset
             // 
             this.auxOffset.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.auxOffset.Location = new System.Drawing.Point(135, 307);
-            this.auxOffset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.auxOffset.Location = new System.Drawing.Point(103, 248);
             this.auxOffset.Name = "auxOffset";
-            this.auxOffset.Size = new System.Drawing.Size(268, 39);
+            this.auxOffset.Size = new System.Drawing.Size(238, 32);
             this.auxOffset.TabIndex = 130;
             this.auxOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.auxOffset.TextChanged += new System.EventHandler(this.auxOffset_TextChanged);
             // 
             // hScrollBar10
             // 
-            this.hScrollBar10.Location = new System.Drawing.Point(135, 261);
+            this.hScrollBar10.Location = new System.Drawing.Point(103, 200);
             this.hScrollBar10.Name = "hScrollBar10";
-            this.hScrollBar10.Size = new System.Drawing.Size(366, 13);
+            this.hScrollBar10.Size = new System.Drawing.Size(326, 13);
             this.hScrollBar10.TabIndex = 129;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(39, 218);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Location = new System.Drawing.Point(34, 170);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(63, 28);
+            this.label7.Size = new System.Drawing.Size(51, 21);
             this.label7.TabIndex = 128;
             this.label7.Text = "AMPL";
             // 
             // auxAmplitude
             // 
             this.auxAmplitude.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.auxAmplitude.Location = new System.Drawing.Point(135, 212);
-            this.auxAmplitude.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.auxAmplitude.Location = new System.Drawing.Point(99, 164);
             this.auxAmplitude.Name = "auxAmplitude";
-            this.auxAmplitude.Size = new System.Drawing.Size(268, 39);
+            this.auxAmplitude.Size = new System.Drawing.Size(238, 32);
             this.auxAmplitude.TabIndex = 127;
             this.auxAmplitude.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.auxAmplitude.TextChanged += new System.EventHandler(this.auxAmplitude_TextChanged);
             // 
             // hScrollBar11
             // 
-            this.hScrollBar11.Location = new System.Drawing.Point(131, 169);
+            this.hScrollBar11.Location = new System.Drawing.Point(99, 135);
             this.hScrollBar11.Name = "hScrollBar11";
-            this.hScrollBar11.Size = new System.Drawing.Size(372, 13);
+            this.hScrollBar11.Size = new System.Drawing.Size(330, 13);
             this.hScrollBar11.TabIndex = 126;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(37, 120);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Location = new System.Drawing.Point(33, 99);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(59, 28);
+            this.label8.Size = new System.Drawing.Size(48, 21);
             this.label8.TabIndex = 125;
             this.label8.Text = "FREQ";
             // 
             // auxFrequency
             // 
             this.auxFrequency.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.auxFrequency.Location = new System.Drawing.Point(131, 120);
-            this.auxFrequency.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.auxFrequency.Location = new System.Drawing.Point(99, 99);
             this.auxFrequency.Name = "auxFrequency";
-            this.auxFrequency.Size = new System.Drawing.Size(271, 39);
+            this.auxFrequency.Size = new System.Drawing.Size(242, 32);
             this.auxFrequency.TabIndex = 124;
             this.auxFrequency.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.auxFrequency.TextChanged += new System.EventHandler(this.auxFrequency_TextChanged);
@@ -992,18 +947,17 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(37, 46);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Location = new System.Drawing.Point(33, 38);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(64, 28);
+            this.label9.Size = new System.Drawing.Size(51, 21);
             this.label9.TabIndex = 123;
             this.label9.Text = "WAVE";
             // 
             // hScrollBar12
             // 
-            this.hScrollBar12.Location = new System.Drawing.Point(131, 80);
+            this.hScrollBar12.Location = new System.Drawing.Point(99, 65);
             this.hScrollBar12.Name = "hScrollBar12";
-            this.hScrollBar12.Size = new System.Drawing.Size(372, 13);
+            this.hScrollBar12.Size = new System.Drawing.Size(330, 13);
             this.hScrollBar12.TabIndex = 122;
             // 
             // auxWaveForm
@@ -1111,11 +1065,10 @@
             "ARB62",
             "ARB63",
             "ARB64"});
-            this.auxWaveForm.Location = new System.Drawing.Point(246, 41);
-            this.auxWaveForm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.auxWaveForm.Location = new System.Drawing.Point(201, 37);
             this.auxWaveForm.Name = "auxWaveForm";
             this.auxWaveForm.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.auxWaveForm.Size = new System.Drawing.Size(256, 31);
+            this.auxWaveForm.Size = new System.Drawing.Size(228, 25);
             this.auxWaveForm.TabIndex = 121;
             this.auxWaveForm.SelectedIndexChanged += new System.EventHandler(this.auxWaveForm_SelectedIndexChanged);
             this.auxWaveForm.Click += new System.EventHandler(this.mainWaveForm_Click);
@@ -1123,10 +1076,9 @@
             // auxOnOff
             // 
             this.auxOnOff.BackColor = System.Drawing.Color.Transparent;
-            this.auxOnOff.Location = new System.Drawing.Point(131, 40);
-            this.auxOnOff.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.auxOnOff.Location = new System.Drawing.Point(99, 35);
             this.auxOnOff.Name = "auxOnOff";
-            this.auxOnOff.Size = new System.Drawing.Size(108, 34);
+            this.auxOnOff.Size = new System.Drawing.Size(96, 28);
             this.auxOnOff.TabIndex = 120;
             this.auxOnOff.Text = "CH1 On/Off";
             this.auxOnOff.UseVisualStyleBackColor = false;
@@ -1136,39 +1088,35 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label10.Location = new System.Drawing.Point(10, 14);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Location = new System.Drawing.Point(9, 11);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(51, 28);
+            this.label10.Size = new System.Drawing.Size(41, 21);
             this.label10.TabIndex = 119;
             this.label10.Text = "CH2";
             // 
             // comport
             // 
             this.comport.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.comport.Location = new System.Drawing.Point(734, 557);
-            this.comport.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.comport.Location = new System.Drawing.Point(647, 458);
             this.comport.Name = "comport";
-            this.comport.Size = new System.Drawing.Size(95, 30);
+            this.comport.Size = new System.Drawing.Size(85, 26);
             this.comport.TabIndex = 2;
             // 
             // model
             // 
             this.model.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.model.Location = new System.Drawing.Point(692, 774);
-            this.model.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.model.Location = new System.Drawing.Point(610, 638);
             this.model.Name = "model";
-            this.model.Size = new System.Drawing.Size(179, 30);
+            this.model.Size = new System.Drawing.Size(159, 26);
             this.model.TabIndex = 1;
             this.model.TextChanged += new System.EventHandler(this.model_TextChanged);
             // 
             // TextWindow
             // 
             this.TextWindow.Location = new System.Drawing.Point(4, 29);
-            this.TextWindow.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.TextWindow.Name = "TextWindow";
-            this.TextWindow.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.TextWindow.Size = new System.Drawing.Size(1567, 829);
+            this.TextWindow.Padding = new System.Windows.Forms.Padding(3);
+            this.TextWindow.Size = new System.Drawing.Size(1392, 679);
             this.TextWindow.TabIndex = 1;
             this.TextWindow.Text = "                                            Text Window                          " +
     "                  ";
@@ -1178,11 +1126,10 @@
             // 
             this.WaveformProcessing.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.WaveformProcessing.Location = new System.Drawing.Point(4, 29);
-            this.WaveformProcessing.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.WaveformProcessing.Name = "WaveformProcessing";
-            this.WaveformProcessing.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.WaveformProcessing.Padding = new System.Windows.Forms.Padding(3);
             this.WaveformProcessing.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.WaveformProcessing.Size = new System.Drawing.Size(1567, 829);
+            this.WaveformProcessing.Size = new System.Drawing.Size(1392, 679);
             this.WaveformProcessing.TabIndex = 0;
             this.WaveformProcessing.Text = "                                    Waveform Processing                          " +
     "           ";
@@ -1197,23 +1144,23 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(637, 0);
+            this.comboBox1.Location = new System.Drawing.Point(566, 0);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(8, 31);
+            this.comboBox1.Size = new System.Drawing.Size(7, 27);
             this.comboBox1.TabIndex = 2;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkBlue;
-            this.ClientSize = new System.Drawing.Size(1589, 900);
+            this.ClientSize = new System.Drawing.Size(1413, 744);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.WaveformWindow);
             this.Controls.Add(this.menuStrip1);
             this.HelpButton = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "Form1";
             this.Text = "DDS 6900 PC Software";
             this.menuStrip1.ResumeLayout(false);

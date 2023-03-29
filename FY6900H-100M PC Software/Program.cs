@@ -6,8 +6,10 @@ using System.Threading;
 
 namespace FY6900H_100M_PC_Software
 {
+
     internal static class Program
     {
+ 
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -16,6 +18,9 @@ namespace FY6900H_100M_PC_Software
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
+            var culture = new CultureInfo("en-US");
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
             ApplicationConfiguration.Initialize();
             Application.Run(new Form1());
         }
@@ -119,31 +124,31 @@ namespace FY6900H_100M_PC_Software
 
         private static void readParameters()
         {
-            CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
-            ci.NumberFormat.CurrencyDecimalSeparator = ".";
+            //CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+            //ci.NumberFormat.CurrencyDecimalSeparator = ".";
             _serialPort.Open();
             Parameters.mainWaveForm = readParameter("RMW");
-            Parameters.mainFrequency = decimal.Parse(readParameter("RMF"), NumberStyles.Any, ci);
-            Parameters.mainAmplitude = decimal.Parse(readParameter("RMA"), NumberStyles.Any, ci) / 10000;
+            Parameters.mainFrequency = decimal.Parse(readParameter("RMF"));
+            Parameters.mainAmplitude = decimal.Parse(readParameter("RMA")) / 10000;
             Parameters.mainOffset = convertSignedStringToDecimal(readParameter("RMO")) / 1000m;
-            Parameters.mainDuty = decimal.Parse(readParameter("RMD"), NumberStyles.Any, ci) / 1000;
-            Parameters.mainPhase = decimal.Parse(readParameter("RMP"), NumberStyles.Any, ci) / 1000;
+            Parameters.mainDuty = decimal.Parse(readParameter("RMD")) / 1000;
+            Parameters.mainPhase = decimal.Parse(readParameter("RMP")) / 1000;
             Parameters.mainOnOff = readParameter("RMN");
             Parameters.auxWaveForm = readParameter("RFW");
-            Parameters.auxFrequency = decimal.Parse(readParameter("RFF"), NumberStyles.Any, ci);
-            Parameters.auxAmplitude = decimal.Parse(readParameter("RFA"), NumberStyles.Any, ci) / 10000;
+            Parameters.auxFrequency = decimal.Parse(readParameter("RFF"));
+            Parameters.auxAmplitude = decimal.Parse(readParameter("RFA")) / 10000;
             Parameters.auxOffset = convertSignedStringToDecimal(readParameter("RFO")) / 1000m;
-            Parameters.auxDuty = decimal.Parse(readParameter("RFD"), NumberStyles.Any, ci) / 1000;
-            Parameters.auxPhase = decimal.Parse(readParameter("RFP"), NumberStyles.Any, ci) / 1000;
+            Parameters.auxDuty = decimal.Parse(readParameter("RFD")) / 1000;
+            Parameters.auxPhase = decimal.Parse(readParameter("RFP")) / 1000;
             Parameters.auxOnOff = readParameter("RFN");
             Parameters.mainTriggerMode = readParameter("RPF");
             Parameters.mainTriggerSource = readParameter("RPM");
-            Parameters.mainFSKSecondaryFrequency = float.Parse(readParameter("RFK"), NumberStyles.Any, ci);
+            Parameters.mainFSKSecondaryFrequency = float.Parse(readParameter("RFK"));
             Parameters.mainPulseAmountTriggered = long.Parse(readParameter("RPN"));
             Parameters.manualTriggerSource = readParameter("WPO");
-            Parameters.mainModulationRateAM = float.Parse(readParameter("RPR"), NumberStyles.Any, ci) / 1000;
-            Parameters.mainModulationFrequencyOffseetFM = float.Parse(readParameter("RFM"), NumberStyles.Any, ci);
-            Parameters.mainModulationPhaseOffset = float.Parse(readParameter("RPP"), NumberStyles.Any, ci) / 1000;
+            Parameters.mainModulationRateAM = float.Parse(readParameter("RPR")) / 1000;
+            Parameters.mainModulationFrequencyOffseetFM = float.Parse(readParameter("RFM"));
+            Parameters.mainModulationPhaseOffset = float.Parse(readParameter("RPP")) / 1000;
             //readParameter("WCC", Parameters.couplingMode);
             //readParameter("WCZ", Parameters.resetCounter);
             //readParameter("WCP", Parameters.pauseTheMeasurement);
@@ -175,8 +180,8 @@ namespace FY6900H_100M_PC_Software
 
         private void displayParameters()
         {
-            CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
-            ci.NumberFormat.CurrencyDecimalSeparator = ".";
+            //CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+            //ci.NumberFormat.CurrencyDecimalSeparator = ".";
             if (mainWaveForm.Text != waveConvertMain(Parameters.mainWaveForm)) mainWaveForm.Text = waveConvertMain(Parameters.mainWaveForm);
             if (mainFrequency.Text != frequencyNormalizeToBox(mainFreqUnit.Text, Parameters.mainFrequency)) mainFrequency.Text = frequencyNormalizeToBox(mainFreqUnit.Text, Parameters.mainFrequency);
             if (mainAmplitude.Text != amplitudeNormalizeToBox(mainAmplitudeUnit.Text, Parameters.mainAmplitude)) mainAmplitude.Text = amplitudeNormalizeToBox(mainAmplitudeUnit.Text, Parameters.mainAmplitude);
@@ -270,8 +275,9 @@ namespace FY6900H_100M_PC_Software
 
         private string frequencyNormalizeToBox(string unit, decimal frequencyPar) //Used to correct display frequency in text box
         {
-            CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
-            ci.NumberFormat.CurrencyDecimalSeparator = ".";
+            //CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+            //ci.NumberFormat.CurrencyDecimalSeparator = ".";
+            //NumberFormatInfo ci = new NumberFormatInfo();
             string frequency = "";
             if (unit == "Hz") frequency = frequencyPar.ToString();
             else
@@ -283,14 +289,16 @@ namespace FY6900H_100M_PC_Software
         }
         private string frequencyNormalizeToSend(string unit, string frequencyPar) //Used to form frequency string to be sent to generator
         {
-            CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
-            ci.NumberFormat.CurrencyDecimalSeparator = ".";
+            //CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+            //ci.NumberFormat.CurrencyDecimalSeparator = ".";
+            //NumberFormatInfo ci = new NumberFormatInfo();
+            //ci.NumberDecimalSeparator = ".";
             decimal frequency = 0;
-            //string frequencyString = frequencyPar.Replace(".", ",");
-            string frequencyString = frequencyPar;
+            string frequencyString = frequencyPar.Replace(",", ".");
+            //string frequencyString = frequencyPar;
             try
             {
-                frequency = decimal.Parse(frequencyString, NumberStyles.Any, ci);
+                frequency = decimal.Parse(frequencyString);
             }
             catch (Exception ex) { return ""; }
             if (frequency > 100000000M) frequency = 100000000M; //Frequency limit to 100MHz
@@ -308,8 +316,8 @@ namespace FY6900H_100M_PC_Software
         }
         private string amplitudeNormalizeToBox(string unit, decimal amplitudePar) //Used to correct display frequency in text box
         {
-            CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
-            ci.NumberFormat.CurrencyDecimalSeparator = ".";
+            //CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+            //ci.NumberFormat.CurrencyDecimalSeparator = ".";
             string amplitudeString = "";
             if (unit == "V") amplitudeString = amplitudePar.ToString();
             else
@@ -324,14 +332,14 @@ namespace FY6900H_100M_PC_Software
         }
         private string amplitudeNormalizeToSend(string unit, string amplitudePar) //Used to form amplitude string to be sent to generator
         {
-            CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
-            ci.NumberFormat.CurrencyDecimalSeparator = ".";
+            //CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+            //ci.NumberFormat.CurrencyDecimalSeparator = ".";
             decimal amplitude = 0;
-            //string amplitudeString = amplitudePar.Replace(".", ",");
-            string amplitudeString = amplitudePar;
+            string amplitudeString = amplitudePar.Replace(",", ".");
+            //string amplitudeString = amplitudePar;
             try
             {
-                amplitude = decimal.Parse(amplitudeString, NumberStyles.Any, ci);
+                amplitude = decimal.Parse(amplitudeString);
             }
             catch (Exception ex) { return ""; }
 
@@ -350,8 +358,8 @@ namespace FY6900H_100M_PC_Software
         }
         private string offsetNormalizeToBox(string unit, decimal offsetPar) //Used to correct display amplitude in text box
         {
-            CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
-            ci.NumberFormat.CurrencyDecimalSeparator = ".";
+            //CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+            //ci.NumberFormat.CurrencyDecimalSeparator = ".";
             string offsetString = "";
             if (unit == "V") offsetString = offsetPar.ToString();
             else
@@ -363,14 +371,14 @@ namespace FY6900H_100M_PC_Software
         }
         private string offsetNormalizeToSend(string unit, string offsetPar) //Used to form amplitude string to be sent to generator
         {
-            CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
-            ci.NumberFormat.CurrencyDecimalSeparator = ".";
+            //CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+            //ci.NumberFormat.CurrencyDecimalSeparator = ".";
             decimal offset = 0;
-            //string offsetString = offsetPar.ToString().Replace(".", ",");
-            string offsetString = offsetPar.ToString();
+            string offsetString = offsetPar.Replace(",", ".");
+            //string offsetString = offsetPar.ToString();
             try
             {
-                offset = decimal.Parse(offsetString, NumberStyles.Any, ci);
+                offset = decimal.Parse(offsetString);
             }
             catch (Exception ex) { return ""; }
 
@@ -384,14 +392,14 @@ namespace FY6900H_100M_PC_Software
         }
         private string phaseNormalizeToSend(string phasePar)
         {
-            CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
-            ci.NumberFormat.CurrencyDecimalSeparator = ".";
+            //CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+            //ci.NumberFormat.CurrencyDecimalSeparator = ".";
             decimal phase = 0;
-            //string phaseString = phasePar.ToString().Replace(".", ",");
-            string phaseString = phasePar.ToString();
+            string phaseString = phasePar.Replace(",", ".");
+            //string phaseString = phasePar.ToString();
             try
             {
-                phase = decimal.Parse(phaseString, NumberStyles.Any, ci);
+                phase = decimal.Parse(phaseString);
             }
             catch (Exception ex) { return ""; }
             //           if (!phaseString.Contains(".")) phaseString += ".0"; //Workarround on dividing by 10 if numer is without "'"
@@ -401,14 +409,14 @@ namespace FY6900H_100M_PC_Software
         }
         private string dutyNormalizeToSend(string dutyPar)
         {
-            CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
-            ci.NumberFormat.CurrencyDecimalSeparator = ".";
+            //CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+            //ci.NumberFormat.CurrencyDecimalSeparator = ".";
             decimal duty = 0;
-            //string dutyString = dutyPar.ToString().Replace(".", ",");
-            string dutyString = dutyPar.ToString();
+            string dutyString = dutyPar.Replace(",", ".");
+            //string dutyString = dutyPar.ToString();
             try
             {
-                duty = decimal.Parse(dutyString, NumberStyles.Any, ci);
+                duty = decimal.Parse(dutyString);
             }
             catch (Exception ex) { return ""; }
             //           if (!dutyString.Contains(".")) dutyString += ".0"; //Workarround on dividing by 10 if numer is without "'"
